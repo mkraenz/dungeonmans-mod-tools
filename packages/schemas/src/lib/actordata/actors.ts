@@ -25,23 +25,95 @@ type WithChampionPower = {
   [key in `championpower_${DoubleDigit}`]?: PowerRef;
 };
 
+export type AttackParticle =
+  | (string & {})
+  | 'particle_attack_weapon_bite'
+  | 'particle_attack_weapon_claw'
+  | 'particle_attack_weapon_pierce'
+  | 'particle_attack_weapon_polearm'
+  | 'particle_attack_weapon_punch_green'
+  | 'particle_attack_weapon_punch'
+  | 'particle_attack_weapon_slash'
+  | 'particle_attack_weapon_slime'
+  | 'particle_blunt_impact_noshake'
+  | 'particle_blunt_impact'
+  | 'particle_fire_quick_burn'
+  | 'particle_poison_splat';
+
+export type AttackSfx =
+  | (string & {})
+  | 'earth_impact'
+  | 'glass_shatter'
+  | 'magic_fire_impact'
+  | 'magic_ice_impact'
+  | 'magic_impact_fire'
+  | 'magic_poison_impact'
+  | 'magic_purple_charge'
+  | 'monster_attack_bite'
+  | 'monster_attack_claw'
+  | 'monster_attack_fire_axe'
+  | 'monster_attack_slime'
+  | 'punch'
+  | 'purple_slash'
+  | 'weapon_1h_axe_hit'
+  | 'weapon_1h_blunt_hit'
+  | 'weapon_1h_sword_hit'
+  | 'weapon_projectile_generic'
+  | 'weapon_wizard_staff_hit';
+
+export type Banter =
+  | (string & {})
+  | 'bandit'
+  | 'bee'
+  | 'creature'
+  | 'finalboss'
+  | 'lizard'
+  | 'orc'
+  | 'punk'
+  | 'purple'
+  | 'scrobold'
+  | 'slime'
+  | 'subboss'
+  | 'traplord'
+  | 'undead'
+  | 'warlord_commander'
+  | 'warlord';
+
+export type NameTable =
+  | 'bandit_name_chart'
+  | 'bee_name_chart'
+  | 'critter_name_chart'
+  | 'lizard_name_chart'
+  | 'orc_name_chart'
+  | 'punk_name_chart'
+  | 'purple_name_chart'
+  | 'rare_mostly_name_chart'
+  | 'scrobold_name_chart'
+  | 'sorceror_supreme_name_chart'
+  | 'undead_name_chart'
+  | 'warlord_commander_name_chart'
+  | 'warlord_conqueror_name_chart'
+  | 'warlord_harrier_name_chart'
+  | 'warlord_herald_name_chart'
+  | 'warlord_sorceror_name_chart';
+
 export type DmMonsterKnowledge =
-  | 'scrobolds'
-  | 'lesser_beasts'
-  | 'greater_beasts'
-  | 'punks'
   | 'bandits'
   | 'bees'
   | 'brigands'
+  | 'cultists'
+  | 'greater_beasts'
+  | 'lesser_beasts'
   | 'lizardmens'
   | 'orcs'
-  | 'undeads'
-  | 'warlords'
-  | 'cultists'
+  | 'punks'
   | 'purpleonians'
+  | 'scorpocompys'
+  | 'scrobolds'
   | 'slimes'
   | 'snakes'
-  | 'scorpocompys';
+  | 'undeads'
+  | 'warlords';
 
 /** @asType integer */
 type Integer = number;
@@ -81,11 +153,10 @@ export type DmMonster = {
   scale_max: number;
   scale_adjusthealth: number;
   scale_adjustdamage: number;
-  // yep, max 9 meleedamage. We could get more complicated using `[key in `meleedamage_${digit}${digit}`]?: string` but i'm not sure whether it works with the json schema generation. Anyway, 9 types of meleedamage should probably suffice for a good while.
-  nametable: string;
+  nametable: NameTable;
 
   /** Whether the actor has ranged attacks. If true, set the several properties starting with ranged* and tooclosedistance. */
-  hasRanged: boolean;
+  hasRanged?: boolean;
   /** TODO: This probably is the projectile sprite.  */
   rangedAttackSprite?: string;
   rangedAttackRange?: Integer;
@@ -95,13 +166,24 @@ export type DmMonster = {
   rangedattackrecharge?: Integer | string;
   tooclosedistance?: Integer;
 
+  armor?: Integer;
+  parry?: Integer;
+  block?: Integer;
+  dodge?: Integer;
+  base_defeatarmor?: Integer;
+  base_defeatblock?: Integer;
+  base_defeatparry?: Integer;
+  hitBonus?: Integer;
+
+  /**
+   * The "knowledge category" this monster falls under.
+   * Influences item drops, bonus damage, and maybe more.
+   */
   knowledge: DmMonsterKnowledge;
-  /** @asType integer */
-  base_defeatarmor: Integer;
   /** What particle effect draws in the world when this guy attacks? */
-  basicattackparticle: string;
+  basicattackparticle: AttackParticle;
   /** What sound plays when this monster attacks? */
-  attack_sfx: string;
+  attack_sfx: AttackSfx;
   /**
    * Monsters drop steaks of themselves sometimes, and those steaks can be used to feed your birds
    * so they learn powers. Comma-separated string of four values "drop_chance,tough_or_swift,melee_or_ranged,power":
@@ -111,7 +193,7 @@ export type DmMonster = {
    * - Powers that can be learned by your bird for eating this steak. Reference to an entity in specialpowerdata/.
    */
   steakdata?: string;
-  banter: string;
+  banter: Banter;
 } & WithMeleeDamage &
   WithRangedDamage &
   WithPower &

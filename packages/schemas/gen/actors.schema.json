@@ -2,6 +2,87 @@
   "$ref": "#/definitions/DmActors",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "AttackParticle": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "enum": [
+            "particle_attack_weapon_bite",
+            "particle_attack_weapon_claw",
+            "particle_attack_weapon_pierce",
+            "particle_attack_weapon_polearm",
+            "particle_attack_weapon_punch_green",
+            "particle_attack_weapon_punch",
+            "particle_attack_weapon_slash",
+            "particle_attack_weapon_slime",
+            "particle_blunt_impact_noshake",
+            "particle_blunt_impact",
+            "particle_fire_quick_burn",
+            "particle_poison_splat"
+          ],
+          "type": "string"
+        }
+      ]
+    },
+    "AttackSfx": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "enum": [
+            "earth_impact",
+            "glass_shatter",
+            "magic_fire_impact",
+            "magic_ice_impact",
+            "magic_impact_fire",
+            "magic_poison_impact",
+            "magic_purple_charge",
+            "monster_attack_bite",
+            "monster_attack_claw",
+            "monster_attack_fire_axe",
+            "monster_attack_slime",
+            "punch",
+            "purple_slash",
+            "weapon_1h_axe_hit",
+            "weapon_1h_blunt_hit",
+            "weapon_1h_sword_hit",
+            "weapon_projectile_generic",
+            "weapon_wizard_staff_hit"
+          ],
+          "type": "string"
+        }
+      ]
+    },
+    "Banter": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "enum": [
+            "bandit",
+            "bee",
+            "creature",
+            "finalboss",
+            "lizard",
+            "orc",
+            "punk",
+            "purple",
+            "scrobold",
+            "slime",
+            "subboss",
+            "traplord",
+            "undead",
+            "warlord_commander",
+            "warlord"
+          ],
+          "type": "string"
+        }
+      ]
+    },
     "Damage": {
       "description": "The base damage an attack does. A string triple of format \"damage_type,dice_roll,???\".\n- List of damage types: melee, ranged, fire, ice, dark, starlight, poison, bleed.   It might be that you can also combine multiple types using an & character, for example \"melee&dark&poison,1d6+35,0\" but I am not sure whether that works and what exactly it does.\n- dice_roll can be either a number or the TTRPG dice notation.\n- ??? I think this is always 0 for damage dealt. This third number only becomes relevant for `damagetaken01` properties where it seems to represent how much more damage is being taken by this type of attack, effectively meaning elemental weaknesses.",
       "examples": [
@@ -29,9 +110,12 @@
       "additionalProperties": false,
       "description": "Docs at https://dungeonmans.fandom.com/wiki/Mods:_Adding_Monsters",
       "properties": {
+        "armor": {
+          "type": "integer"
+        },
         "attack_sfx": {
-          "description": "What sound plays when this monster attacks?",
-          "type": "string"
+          "$ref": "#/definitions/AttackSfx",
+          "description": "What sound plays when this monster attacks?"
         },
         "bBlockTileEntry": {
           "const": true,
@@ -39,14 +123,23 @@
           "type": "boolean"
         },
         "banter": {
-          "type": "string"
+          "$ref": "#/definitions/Banter"
         },
         "base_defeatarmor": {
           "type": "integer"
         },
+        "base_defeatblock": {
+          "type": "integer"
+        },
+        "base_defeatparry": {
+          "type": "integer"
+        },
         "basicattackparticle": {
-          "description": "What particle effect draws in the world when this guy attacks?",
-          "type": "string"
+          "$ref": "#/definitions/AttackParticle",
+          "description": "What particle effect draws in the world when this guy attacks?"
+        },
+        "block": {
+          "type": "integer"
         },
         "championpower_01": {
           "$ref": "#/definitions/PowerRef"
@@ -135,6 +228,9 @@
           ],
           "description": "Reference to an entitydefs of class dmCoins inside ActorData/coins.txt"
         },
+        "dodge": {
+          "type": "integer"
+        },
         "hasRanged": {
           "description": "Whether the actor has ranged attacks. If true, set the several properties starting with ranged* and tooclosedistance.",
           "type": "boolean"
@@ -142,8 +238,12 @@
         "health": {
           "type": "integer"
         },
+        "hitBonus": {
+          "type": "integer"
+        },
         "knowledge": {
-          "$ref": "#/definitions/DmMonsterKnowledge"
+          "$ref": "#/definitions/DmMonsterKnowledge",
+          "description": "The \"knowledge category\" this monster falls under. Influences item drops, bonus damage, and maybe more."
         },
         "level": {
           "type": "integer"
@@ -210,7 +310,10 @@
           "type": "string"
         },
         "nametable": {
-          "type": "string"
+          "$ref": "#/definitions/NameTable"
+        },
+        "parry": {
+          "type": "integer"
         },
         "power_01": {
           "$ref": "#/definitions/PowerRef"
@@ -372,11 +475,9 @@
         "attack_sfx",
         "bBlockTileEntry",
         "banter",
-        "base_defeatarmor",
         "basicattackparticle",
         "class",
         "cointype",
-        "hasRanged",
         "health",
         "knowledge",
         "level",
@@ -392,22 +493,22 @@
     },
     "DmMonsterKnowledge": {
       "enum": [
-        "scrobolds",
-        "lesser_beasts",
-        "greater_beasts",
-        "punks",
         "bandits",
         "bees",
         "brigands",
+        "cultists",
+        "greater_beasts",
+        "lesser_beasts",
         "lizardmens",
         "orcs",
-        "undeads",
-        "warlords",
-        "cultists",
+        "punks",
         "purpleonians",
+        "scorpocompys",
+        "scrobolds",
         "slimes",
         "snakes",
-        "scorpocompys"
+        "undeads",
+        "warlords"
       ],
       "type": "string"
     },
@@ -454,6 +555,27 @@
         "dialog_onBumped"
       ],
       "type": "object"
+    },
+    "NameTable": {
+      "enum": [
+        "bandit_name_chart",
+        "bee_name_chart",
+        "critter_name_chart",
+        "lizard_name_chart",
+        "orc_name_chart",
+        "punk_name_chart",
+        "purple_name_chart",
+        "rare_mostly_name_chart",
+        "scrobold_name_chart",
+        "sorceror_supreme_name_chart",
+        "undead_name_chart",
+        "warlord_commander_name_chart",
+        "warlord_conqueror_name_chart",
+        "warlord_harrier_name_chart",
+        "warlord_herald_name_chart",
+        "warlord_sorceror_name_chart"
+      ],
+      "type": "string"
     },
     "PowerRef": {
       "description": "Reference to an entity of class \"dmSpecialPower\" in specialpowerdata/.",

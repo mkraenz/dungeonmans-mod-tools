@@ -18,9 +18,14 @@ export class FileSystem {
     return this.options.verbose;
   }
 
-  async writeFile(destPath: string, entityDef: string) {
+  async writeFile(destPath: string, body: string) {
     if (this.verbose) Logger.log('WRITE FILE:', destPath);
-    if (!this.dryRun) await fsp.writeFile(destPath, entityDef);
+    if (!this.dryRun) await fsp.writeFile(destPath, body);
+  }
+
+  async appendToFile(destPath: string, body: string) {
+    if (this.verbose) Logger.log('APPEND FILE:', destPath);
+    if (!this.dryRun) await fsp.appendFile(destPath, body);
   }
 
   async makeDir(dir: string) {
