@@ -13,9 +13,11 @@ program
   .name('@dungeonmans-mod-tools/cli')
   .description('CLI to help you develop mod content for Dungeonmans.')
   .version(packagejson.version);
-program.addCommand(createInitCommand());
-program.addCommand(createBuildCommand());
-program.addCommand(createSchemasCommand());
-program.addCommand(createValidateRefCommand());
+program
+  .addCommand(createInitCommand())
+  .addCommand(createBuildCommand())
+  .addCommand(createSchemasCommand())
+  // .addCommand(createExtractCommand())
+  .addCommand(createValidateRefCommand());
 
 program.parse();
