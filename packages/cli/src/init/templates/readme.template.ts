@@ -52,5 +52,6 @@ Finally, start the game, select it in the mod loader popup, and enjoy Dungeonman
 - [Dungeonmans Discord](https://discord.gg/stremf)
 - [Best Practices for using Dungeonmans Mod Tools](https://github.com/mkraenz/dungeonmans-mod-tools/blob/main/Learnings-modding-dungeonmans.md)
 - [Dungeonmans Mod Tools Github](https://github.com/mkraenz/dungeonmans-modding-tools)
+- [Dungeonmans Academy Student Handbook by Doom_Cookies on Steam Community Forums](https://steamcommunity.com/sharedfiles/filedetails/?id=2286208804)
 - [CLI Docs on NPM](https://www.npmjs.com/package/@dungeonmans-mod-tools/cli)
 `;
