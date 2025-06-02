@@ -1,3 +1,16 @@
+## 0.4.0 (2025-06-02)
+
+### 🚀 Features
+
+- **cli:** init cmd: readme includes academy student handbook ([a741015](https://github.com/mkraenz/dungeonmans-mod-tools/commit/a741015))
+- **js-to-entitydef:** commented root-level or 2nd-level keys wont be compiled into the entitydef ([f5ded70](https://github.com/mkraenz/dungeonmans-mod-tools/commit/f5ded70))
+- **schemas:** more monster props and autocompletion ([291ac90](https://github.com/mkraenz/dungeonmans-mod-tools/commit/291ac90))
+- **schemas:** actors updated with more autocompletion, props, and docs ([364b988](https://github.com/mkraenz/dungeonmans-mod-tools/commit/364b988))
+
+### ❤️ Thank You
+
+- Mirco Kraenz @mkraenz
+
 ## 0.3.0 (2025-02-09)
 
 ### 🚀 Features
