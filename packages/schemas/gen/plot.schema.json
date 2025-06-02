@@ -201,22 +201,22 @@
     },
     "DmMonsterKnowledge": {
       "enum": [
-        "scrobolds",
-        "lesser_beasts",
-        "greater_beasts",
-        "punks",
         "bandits",
         "bees",
         "brigands",
+        "cultists",
+        "greater_beasts",
+        "lesser_beasts",
         "lizardmens",
         "orcs",
-        "undeads",
-        "warlords",
-        "cultists",
+        "punks",
         "purpleonians",
+        "scorpocompys",
+        "scrobolds",
         "slimes",
         "snakes",
-        "scorpocompys"
+        "undeads",
+        "warlords"
       ],
       "type": "string"
     },

@@ -6,14 +6,16 @@
       "additionalProperties": false,
       "properties": {
         "texturename": {
-          "description": "filename *without* the .png file ending inside textures/",
+          "description": "filename *without* the .png file ending inside textures/. Example: You have a file textures/orc.png, then set \"texturename\": \"orc\"",
           "type": "string"
         },
         "xloc": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer",
+          "description": "The x value of the top-left of this sprite in the texture. x=0,y=0 is the top-left corner of the texture."
         },
         "yloc": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer",
+          "description": "The y value of the top-left of this sprite in the texture. x=0,y=0 is the top-left corner of the texture."
         }
       },
       "required": [
@@ -29,6 +31,9 @@
       },
       "description": "A map from entityDefName to the values inside that entitydef. The name will appear in `entityDef \"<NAME_HERE>\". The value is used to generate the body of the entityDef.",
       "type": "object"
+    },
+    "Integer": {
+      "type": "integer"
     }
   }
 }

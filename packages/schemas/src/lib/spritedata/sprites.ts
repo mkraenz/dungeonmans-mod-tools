@@ -1,10 +1,16 @@
+import { Integer } from '../ts-utils.js';
+
 type DmSpriteBase = {
-  /** filename *without* the .png file ending inside textures/ */
+  /** filename *without* the .png file ending inside textures/. Example: You have a file textures/orc.png, then set "texturename": "orc" */
   texturename: string;
-  /** @asType integer */
-  xloc: number;
-  /** @asType integer */
-  yloc: number;
+  /**
+   * The x value of the top-left of this sprite in the texture. x=0,y=0 is the top-left corner of the texture.
+   */
+  xloc: Integer;
+  /**
+   * The y value of the top-left of this sprite in the texture. x=0,y=0 is the top-left corner of the texture.
+   */
+  yloc: Integer;
 };
 
 export type DmItemSprite = DmSpriteBase;
@@ -14,10 +20,18 @@ export type DmItemSprites = {
 };
 
 export type DmMonsterSprite = DmSpriteBase & {
-  /** Only needed for monsters, npcs, and other actors. Not needed for Item sprites.  */
-  width: 80;
-  /** Only needed for monsters, npcs, and other actors. Not needed for Item sprites.  */
-  height: 128;
+  /**
+   * The width of your sprite within the texture.
+   * Only needed for monsters, npcs, and other actors. Not needed for Item sprites.
+   * @default 80
+   */
+  width: Integer;
+  /**
+   * The height of your sprite within the texture.
+   * Only needed for monsters, npcs, and other actors. Not needed for Item sprites.
+   * @default 128
+   */
+  height: Integer;
 };
 
 /** A map from entityDefName to the values inside that entitydef. The name will appear in `entityDef "<NAME_HERE>". The value is used to generate the body of the entityDef. */
