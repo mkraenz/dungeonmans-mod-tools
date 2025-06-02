@@ -19,6 +19,7 @@ export const jsToManyEntityDefs = (
   const opts = { ...defaultOptions, ...options };
   const entityDefs = Object.entries(definitions)
     .filter(([key, _]) => key !== '$schema')
+    .filter(([key, _]) => !key.startsWith('//'))
     .map(([entityDefName, definition]) =>
       jsToEntitydef(entityDefName, definition, opts)
     );

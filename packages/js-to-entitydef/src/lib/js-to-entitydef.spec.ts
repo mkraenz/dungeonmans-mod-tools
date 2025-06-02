@@ -52,4 +52,24 @@ describe('jsToEntitydef', () => {
 }
 `);
   });
+
+  it('should strip "commented" keys', () => {
+    const result = jsToEntitydef(
+      'mymonster',
+      {
+        test: 1,
+        '// commented': 'hello',
+        '//commentedout': 'hi',
+        notcommented: 'hiho',
+      },
+      { keyTransform: stripRefs, valueTransform: stripRefs }
+    );
+
+    expect(result).toEqual(`entityDef "mymonster"
+{
+    test 1
+    notcommented "hiho"
+}
+`);
+  });
 });

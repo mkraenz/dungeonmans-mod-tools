@@ -27,13 +27,19 @@ class JsToEntityDefTransformer {
 
   toEntityDef() {
     const header = `entityDef "${this.entityName}"`;
-    const rows = Object.entries(this.keyValuePairs).map(
-      ([key, value]) =>
-        `    ${this.toPrintedKey(key)} ${this.toPrintedValue(value)}`
-    );
+    const rows = Object.entries(this.keyValuePairs)
+      .filter(([key, _]) => !this.shouldStripKey(key))
+      .map(
+        ([key, value]) =>
+          `    ${this.toPrintedKey(key)} ${this.toPrintedValue(value)}`
+      );
 
     const lines = [header, '{', ...rows, '}'];
     return lines.join('\n').concat('\n'); // add a final empty line
+  }
+
+  private shouldStripKey(key: string) {
+    return key.startsWith('//');
   }
 
   private toPrintedKey(key: string) {
