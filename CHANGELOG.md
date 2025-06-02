@@ -1,3 +1,13 @@
+## 0.4.1 (2025-06-02)
+
+### 🩹 Fixes
+
+- **cli:** link intro video in generated readme ([4fb705d](https://github.com/mkraenz/dungeonmans-mod-tools/commit/4fb705d))
+
+### ❤️ Thank You
+
+- Mirco Kraenz @mkraenz
+
 ## 0.4.0 (2025-06-02)
 
 ### 🚀 Features
