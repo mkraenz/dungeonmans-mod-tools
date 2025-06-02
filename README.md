@@ -101,12 +101,6 @@ nx release --skip-publish
 nx run-many -t build
 # publish to npm / verdaccio
 nx release publish
-# grab version
-CLI_VERSION="v$(cat packages/cli/package.json | jq -r .version)"
-# push tag
-git push origin tag $CLI_VERSION
-# create github release
-gh release create $CLI_VERSION --notes 'See [CHANGELOG.md](https://github.com/mkraenz/dungeonmans-mod-tools/blob/main/CHANGELOG.md)'
 ```
 
 #### Tips
@@ -159,6 +153,13 @@ Next, run following:
 nx release --skip-publish
 nx run-many -t build
 nx release publish
+
+# grab version
+CLI_VERSION="v$(cat packages/cli/package.json | jq -r .version)"
+# push tag
+git push origin tag $CLI_VERSION
+# create github release
+gh release create $CLI_VERSION --notes 'See [CHANGELOG.md](https://github.com/mkraenz/dungeonmans-mod-tools/blob/main/CHANGELOG.md)'
 ```
 
 Note
