@@ -4,6 +4,11 @@ export const readmeTemplate = (modname: string) => `# ${modname}
 
 This directory was created using \`npx @dungeonmans-mod-tools/cli init\`.
 
+## Intro
+
+[Video intro p1](https://youtu.be/SCwDaW-Rn_w) 
+[Video intro p2 - writing a mod with Dungeonmans Mod Tools](https://www.youtube.com/watch?v=hrnrwX7FkYg) 
+
 ## Next steps
 
 Add json files to add monsters, dungeons, etc inside the respective subdirectories of the \`src/\` directory.
