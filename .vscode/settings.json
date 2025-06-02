@@ -48,5 +48,6 @@
       "fileMatch": ["**/tabledata/*.json"],
       "url": "https://raw.githubusercontent.com/mkraenz/dungeonmans-mod-tools/refs/heads/main/packages/schemas/gen/encounter-tables.schema.json"
     }
-  ]
+  ],
+  "nxConsole.generateAiAgentRules": true
 }
