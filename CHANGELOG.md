@@ -1,3 +1,15 @@
+## 0.5.0 (2025-06-03)
+
+### 🚀 Features
+
+- **cli:** minor init readme updates ([0a2d127](https://github.com/mkraenz/dungeonmans-mod-tools/commit/0a2d127))
+- **schemas:** refine plots ([affbeb5](https://github.com/mkraenz/dungeonmans-mod-tools/commit/affbeb5))
+- **schemas:** docs for birdtexture ([738f983](https://github.com/mkraenz/dungeonmans-mod-tools/commit/738f983))
+
+### ❤️ Thank You
+
+- Mirco Kraenz @mkraenz
+
 ## 0.4.1 (2025-06-02)
 
 ### 🩹 Fixes
