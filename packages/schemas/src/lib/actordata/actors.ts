@@ -468,7 +468,7 @@ export type DmTownsmans = {
 
 /**
  * Dictionary from entitydef name to DmMonster or DmTownsmans.
- * Docs at for monsters as https://dungeonmans.fandom.com/wiki/Mods:_Adding_Monsters
+ * Docs for monsters as https://dungeonmans.fandom.com/wiki/Mods:_Adding_Monsters
  */
 export type DmActors = {
   [entityDefName: string]: DmMonster | DmTownsmans;

@@ -127,7 +127,7 @@
           }
         ]
       },
-      "description": "Dictionary from entitydef name to DmMonster or DmTownsmans. Docs at for monsters as https://dungeonmans.fandom.com/wiki/Mods:_Adding_Monsters",
+      "description": "Dictionary from entitydef name to DmMonster or DmTownsmans. Docs for monsters as https://dungeonmans.fandom.com/wiki/Mods:_Adding_Monsters",
       "type": "object"
     },
     "DmMonster": {
