@@ -20,4 +20,26 @@ export class EntityRegistry {
   toString() {
     return JSON.stringify([...this.registry]);
   }
+
+  /**
+   * @param predicate a one-level deep object to filter by,
+   * for example setting predicate to `{class: "dmMonster"}` will return
+   * the EntityLocation of all entities that have `class === "dmMonster"`.
+   * Any non-matching entity including those with `class === undefined` will
+   * be excluded from the result.
+   */
+  filter(
+    predicate: Record<string, boolean | string | number | null | undefined>
+  ): Map<EntityName, EntityLocation> {
+    const entityLocs = this.registry.entries().filter(([_, loc]) => {
+      return (
+        typeof loc.entity === 'object' &&
+        Object.entries(predicate).every(
+          ([key, value]) =>
+            (loc.entity as Record<PropertyKey, unknown>)?.[key] === value
+        )
+      );
+    });
+    return new Map(entityLocs);
+  }
 }
