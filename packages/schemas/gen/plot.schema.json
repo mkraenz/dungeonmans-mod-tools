@@ -38,13 +38,12 @@
           "type": "string"
         },
         "title": {
-          "description": "Title displayed at the top of the dialog popup.",
+          "description": "Title displayed at the top of the dialog popup. If not set, the game uses the NPC name.",
           "type": "string"
         }
       },
       "required": [
         "classType",
-        "title",
         "message",
         "instigatorSprite",
         "responses"
@@ -58,7 +57,7 @@
         "dialogOptions": {
           "description": "Array of things you can offer the player to choose from.",
           "items": {
-            "$ref": "#/definitions/DmDialogOption"
+            "$ref": "#/definitions/DmDialogResponse"
           },
           "type": "array"
         },
@@ -75,35 +74,6 @@
         "targetArc",
         "stateEquals",
         "dialogOptions"
-      ],
-      "type": "object"
-    },
-    "DmDialogOption": {
-      "additionalProperties": false,
-      "description": "A dialog choice for the player.",
-      "properties": {
-        "message": {
-          "description": "What is being said.",
-          "type": "string"
-        },
-        "responseScript": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "enum": [
-                "none"
-              ],
-              "type": "string"
-            }
-          ],
-          "description": "Either `\"none\"` if there is no further dialog, or a reference to a root-level key in a json in `plotdata/` with `\"classType\": \"dmPlotScript\"`."
-        }
-      },
-      "required": [
-        "message",
-        "responseScript"
       ],
       "type": "object"
     },
@@ -156,41 +126,78 @@
           "type": "object"
         }
       ],
-      "description": "A dialog choice for the player."
+      "description": "A dialog choice for the player. Either responseScript or responseDialog must be set."
     },
     "DmDropItemHook": {
-      "additionalProperties": false,
-      "description": "dmDropItemHook allow to define that specific items drop when the plot thread is in a given state.",
-      "properties": {
-        "dropArchetype": {
-          "description": "What item will be dropped? Reference to an entitydef name in `itemdata/`",
-          "type": "string"
-        },
-        "dropChance": {
-          "description": "What is the probability that a monster in the `targetMonsterKnowledge` array will drop the item?",
-          "maximum": 1,
-          "minimum": 0,
-          "type": "number"
-        },
-        "stateEquals": {
-          "description": "In which plot state has this item a chance to drop? Must match a key in a `dmPlotThread`'s `\"plotStateLookup\"`, for example `\"unstarted\"`.",
-          "type": "string"
-        },
-        "targetMonsterKnowledge": {
-          "description": "What kind of monsters drop the item?",
-          "items": {
-            "$ref": "#/definitions/DmMonsterKnowledge"
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "dropArchetype": {
+              "description": "What item will be dropped? Reference to an entitydef name in `itemdata/`.",
+              "type": "string"
+            },
+            "dropChance": {
+              "description": "What is the probability that a monster in the `targetMonsterKnowledge` or `targetMonsterArchetypes` array will drop the item?",
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            "stateEquals": {
+              "description": "In which plot state has this item a chance to drop? Must match a key in a `dmPlotThread`'s `\"plotStateLookup\"`, for example `\"unstarted\"`.",
+              "type": "string"
+            },
+            "targetMonsterKnowledge": {
+              "description": "What kind of monsters drop the item?",
+              "items": {
+                "$ref": "#/definitions/DmMonsterKnowledge"
+              },
+              "type": "array"
+            }
           },
-          "type": "array"
+          "required": [
+            "dropArchetype",
+            "dropChance",
+            "stateEquals",
+            "targetMonsterKnowledge"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "dropArchetype": {
+              "description": "What item will be dropped? Reference to an entitydef name in `itemdata/`.",
+              "type": "string"
+            },
+            "dropChance": {
+              "description": "What is the probability that a monster in the `targetMonsterKnowledge` or `targetMonsterArchetypes` array will drop the item?",
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            "stateEquals": {
+              "description": "In which plot state has this item a chance to drop? Must match a key in a `dmPlotThread`'s `\"plotStateLookup\"`, for example `\"unstarted\"`.",
+              "type": "string"
+            },
+            "targetMonsterArchetypes": {
+              "description": "What specific monsters drop the item? Array of references to entitydefs of class `dmMonster` in `actors/`.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "dropArchetype",
+            "dropChance",
+            "stateEquals",
+            "targetMonsterArchetypes"
+          ],
+          "type": "object"
         }
-      },
-      "required": [
-        "stateEquals",
-        "targetMonsterKnowledge",
-        "dropArchetype",
-        "dropChance"
       ],
-      "type": "object"
+      "description": "dmDropItemHook allow to define that specific items drop when the plot thread is in a given state."
     },
     "DmDropItemHooks": {
       "description": "dmDropItemHook allow to define that specific items drop when the plot thread is in a given state.",
@@ -247,7 +254,7 @@
           "type": "string"
         },
         "dialogArchetype": {
-          "description": "Which dialog to trigger. A a reference to a root-level key in a json in `plotdata/` with `\"classType\": \"dmDialogData\"`",
+          "description": "Which dialog to trigger. Reference to a root-level key in a json in `plotdata/` with `\"classType\": \"dmDialogData\"`.",
           "type": "string"
         },
         "giveItems": {

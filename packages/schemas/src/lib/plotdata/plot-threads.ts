@@ -47,17 +47,7 @@ export type DmDialogHook = {
    */
   stateEquals: string;
   /** Array of things you can offer the player to choose from. */
-  dialogOptions: DmDialogOption[];
-};
-
-/**
- * A dialog choice for the player.
- */
-export type DmDialogOption = {
-  /** What is being said. */
-  message: string;
-  /** Either `"none"` if there is no further dialog, or a reference to a root-level key in a json in `plotdata/` with `"classType": "dmPlotScript"`. */
-  responseScript: (string & {}) | 'none';
+  dialogOptions: DmDialogResponse[];
 };
 
 /** @asType integer */
@@ -74,7 +64,7 @@ export type DmPlotScript = {
   setThisState: string;
   /**
    * Which dialog to trigger.
-   * A a reference to a root-level key in a json in `plotdata/` with `"classType": "dmDialogData"`
+   * Reference to a root-level key in a json in `plotdata/` with `"classType": "dmDialogData"`.
    */
   dialogArchetype: string;
   /**
@@ -98,8 +88,11 @@ export type DmPlotScript = {
 export type DmDialogData = {
   /** The type of class. Constant. */
   classType: 'dmDialogData';
-  /** Title displayed at the top of the dialog popup. */
-  title: string;
+  /**
+   * Title displayed at the top of the dialog popup.
+   * If not set, the game uses the NPC name.
+   */
+  title?: string;
   /** What is being said by the NPC. */
   message: string;
   /** Reference to a sound baked into the XACT files for the game. */
@@ -111,7 +104,7 @@ export type DmDialogData = {
 };
 
 /**
- * A dialog choice for the player.
+ * A dialog choice for the player. Either responseScript or responseDialog must be set.
  */
 export type DmDialogResponse =
   | {
@@ -146,13 +139,20 @@ export type DmDropItemHook = {
    * Must match a key in a `dmPlotThread`'s `"plotStateLookup"`, for example `"unstarted"`.
    */
   stateEquals: string;
-  /** What kind of monsters drop the item? */
-  targetMonsterKnowledge: DmMonsterKnowledge[];
-  /** What item will be dropped? Reference to an entitydef name in `itemdata/` */
+  /** What item will be dropped? Reference to an entitydef name in `itemdata/`. */
   dropArchetype: string;
-  /** What is the probability that a monster in the `targetMonsterKnowledge` array will drop the item?
+  /** What is the probability that a monster in the `targetMonsterKnowledge` or `targetMonsterArchetypes` array will drop the item?
    * @maximum 1.0
    * @minimum 0.0
    */
   dropChance: number;
-};
+} & (
+  | {
+      /** What kind of monsters drop the item? */
+      targetMonsterKnowledge: DmMonsterKnowledge[];
+    }
+  | {
+      /** What specific monsters drop the item? Array of references to entitydefs of class `dmMonster` in `actors/`. */
+      targetMonsterArchetypes: string[];
+    }
+);
