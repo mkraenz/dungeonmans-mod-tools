@@ -37,6 +37,32 @@ npx @dungeonmans-mod-tools/cli build src dist/${kebabCase(modname)}
 
 > Details: \`.txt\`, \`.png\`, and \`.cs\` files will be copied over as-is. \`.json\` files will be turned into entitydefs inside \`.txt\` files. Notable exceptions being JSON files in \`plotdata/\` and \`overworldgenerationdata/\` which are written to JSON because Dungeonmans supports JSON natively in these two cases.
 
+### Commenting
+
+Since JSON does not natively support comments, you can instead start your json keys with \`//\`  to simulate comments. The build process will ignore those keys, meaning they won't end up in the output \`.txt\` files. For example, you can write:
+
+\`\`\`json
+{
+  "// TODO implement greattroll": {},
+  "// i will be ignored": {
+    "level": 99
+  },
+  "greattroll": {
+    "// i will be ignored": "whatever",
+    "level": 1
+  }
+}
+\`\`\`
+
+After building, the output will look like this:
+
+\`\`\`txt
+entityDef "greattroll"
+{
+    level 1
+}
+\`\`\`
+
 ### Entity Reference Validation
 
 (optional section) Additional tooling is available to speed up mod development:
@@ -47,6 +73,7 @@ npx @dungeonmans-mod-tools/cli validate-refs src
 \`\`\`
 
 > Entity References: Refs help you avoid typos when you need to reference one entity from another. For example, a monster entity requires a sprite entity, so the monster has a property \`"sprite": "mymod_sprite_mymonster"\`, where \`mymod_sprite_mymonster\` must be the name of a sprite entity in \`spritedata/\`. To enable validation on such cases, you can wrap the entity name in \`@ref(..)\`. So in this example you would write \`"sprite": "@ref(mymod_sprite_mymonster)"\`. The \`@ref(..)\` will be removed on \`build\` so only the actual entity name \`mymod_sprite_mymonster\` remains in the build output. This even works for substrings, for example \`1,100,2,@ref(sp_so_many_bites)\`, and inside property keys.
+
 
 ### Deploy and Play your Mod
 
