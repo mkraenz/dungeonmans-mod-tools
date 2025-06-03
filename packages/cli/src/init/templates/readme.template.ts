@@ -6,10 +6,12 @@ This directory was created using \`npx @dungeonmans-mod-tools/cli init\`.
 
 ## Intro
 
-[Video intro p1](https://youtu.be/SCwDaW-Rn_w) 
-[Video intro p2 - writing a mod with Dungeonmans Mod Tools](https://www.youtube.com/watch?v=hrnrwX7FkYg) 
+- [Video intro p1](https://youtu.be/SCwDaW-Rn_w) 
+- [Video intro p2 - writing a mod with Dungeonmans Mod Tools](https://www.youtube.com/watch?v=hrnrwX7FkYg) 
 
-## Next steps
+## Usage
+
+### Add content
 
 Add json files to add monsters, dungeons, etc inside the respective subdirectories of the \`src/\` directory.
 
@@ -35,7 +37,9 @@ npx @dungeonmans-mod-tools/cli build src dist/${kebabCase(modname)}
 
 > Details: \`.txt\`, \`.png\`, and \`.cs\` files will be copied over as-is. \`.json\` files will be turned into entitydefs inside \`.txt\` files. Notable exceptions being JSON files in \`plotdata/\` and \`overworldgenerationdata/\` which are written to JSON because Dungeonmans supports JSON natively in these two cases.
 
-Additional tooling is available to speed up mod development:
+### Entity Reference Validation
+
+(optional section) Additional tooling is available to speed up mod development:
 
 \`\`\`sh
 # validate entity references
@@ -44,11 +48,13 @@ npx @dungeonmans-mod-tools/cli validate-refs src
 
 > Entity References: Refs help you avoid typos when you need to reference one entity from another. For example, a monster entity requires a sprite entity, so the monster has a property \`"sprite": "mymod_sprite_mymonster"\`, where \`mymod_sprite_mymonster\` must be the name of a sprite entity in \`spritedata/\`. To enable validation on such cases, you can wrap the entity name in \`@ref(..)\`. So in this example you would write \`"sprite": "@ref(mymod_sprite_mymonster)"\`. The \`@ref(..)\` will be removed on \`build\` so only the actual entity name \`mymod_sprite_mymonster\` remains in the build output. This even works for substrings, for example \`1,100,2,@ref(sp_so_many_bites)\`, and inside property keys.
 
-Next, copy the \`dist\\${kebabCase(
+### Deploy and Play your Mod
+
+Copy the \`dist\\${kebabCase(
   modname
 )}\` directory as-is to the Dungeonmans mod folder \`c:\\users\\[you]\\appdata\\roaming\\Dungeonmans\\modcontent\\mods\`. 
 
-Finally, start the game, select it in the mod loader popup, and enjoy Dungeonmans by crushing some of your own monster creations and everything else you have created.
+Finally, start the game, select your mod in the mod loader popup, and enjoy Dungeonmans by crushing some of your own monster creations and everything else you have created.
 
 ## Useful Links
 
