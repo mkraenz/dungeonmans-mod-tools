@@ -1,5 +1,15 @@
 # CLI
 
+## Development
+
+From repository root
+
+```sh
+nx run cli:build --watch
+# in another terminal
+node packages/cli/dist/main.js <command>
+```
+
 ## Bundling and Deployment
 
 WIP
@@ -10,7 +20,7 @@ Problem 1
 
 That said, `dist/packages/cli/packages/cli/src/main.js` _does_ have the shebang we define in `packages/cli/src/main.ts:1`.
 
-Question: How to make make turn `dist/packages/cli/main.js` into the correct executable?
+Question: How to turn `dist/packages/cli/main.js` into the correct executable?
 
 Answer: This problem was solved by turning the `cli` project into a _publishable_ library. This way, the `dist` folder stays in the project directory and the shebang is preserved.
 
