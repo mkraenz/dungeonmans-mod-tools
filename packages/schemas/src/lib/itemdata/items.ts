@@ -1,3 +1,5 @@
+import { Integer } from '../ts-utils.js';
+
 export type DmItemNonAcademyTurnIn = {
   /** The type of class. Constant. */
   class: 'dmNonAcademyTurnIn';
@@ -12,8 +14,7 @@ export type DmItemNonAcademyTurnIn = {
   /** Flavor text */
   flavorText: string;
   identified: boolean;
-  /** @asType integer */
-  value: number;
+  value: Integer;
   stackable: boolean;
   /**
    * A tuple of strings separated by a comma.
@@ -40,14 +41,11 @@ export type DmItemConsumable = {
   /** @examples ["How does summoning work? We don't know."] */
   flavorText: string;
   identified: boolean;
-  /** @asType integer */
-  uses: number;
+  uses: Integer;
   /** @examples ["Summoning Bell"] */
   itemtype: string;
-  /** @asType integer */
-  value: number;
-  /** @asType integer */
-  itemrank: 5;
+  value: Integer;
+  itemrank: Integer;
   /** Reference to a specialpowerdata/ entitydef
    * @examples ["sp_modplot_pete_lucky_bell"] */
   power_1: string;
@@ -58,8 +56,7 @@ export type DmArmormentBase = {
   name: string;
   /** Reference to an entitydef in spritedata/ */
   sprite: string;
-  /** @asType integer */
-  tier: number;
+  tier: Integer;
   /** Identifier of the item set this item is part of, if any. Use together entities in in setbonusdata/. */
   itemset?: string;
   /** @examples ["1h", "2h", "heavyarmor", "helm", "glove"] */
@@ -90,11 +87,10 @@ export type DmWeaponBase = {
   /** @examples: ["axe"] */
   info2: string;
   /**
-   * @asType integer
    * @default 1
    * Attack range in number of tiles, diagonals count as 1.
    */
-  range?: number;
+  range?: Integer;
 } & DmArmormentBase;
 
 export type DmWeapon = {
@@ -128,8 +124,7 @@ type DmEnchantments = {
 export type DmWizardStaff = {
   /** The type of class. Constant. */
   class: 'dmWizardStaff';
-  /** @asType integer */
-  spellpower: number;
+  spellpower: Integer;
 } & DmWeaponBase &
   DmEnchantments;
 
@@ -138,10 +133,8 @@ export type DmGear = {} & DmArmormentBase;
 export type DmArmor = {
   /** The type of class. Constant. */
   class: 'dmArmor';
-  /** @asType integer */
-  armorvalue: number;
-  /** @asType integer */
-  dodgevalue: number;
+  armorvalue: Integer;
+  dodgevalue: Integer;
 } & DmEnchantments &
   DmGear;
 
@@ -155,8 +148,7 @@ export type DmHelm = {
 export type DmGlove = {
   /** The type of class. Constant. */
   class: 'dmGlove';
-  /** @asType integer */
-  defeatarmor: number;
+  defeatarmor: Integer;
 } & DmEnchantments &
   DmGear;
 

@@ -6,7 +6,7 @@
       "additionalProperties": false,
       "properties": {
         "armorvalue": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         },
         "class": {
           "const": "dmArmor",
@@ -14,7 +14,7 @@
           "type": "string"
         },
         "dodgevalue": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         },
         "flavorText": {
           "description": "Text displayed on the item details.",
@@ -83,7 +83,7 @@
           "type": "string"
         },
         "tier": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         },
         "uniqueitem": {
           "default": false,
@@ -118,7 +118,7 @@
           "type": "string"
         },
         "defeatarmor": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         },
         "flavorText": {
           "description": "Text displayed on the item details.",
@@ -187,7 +187,7 @@
           "type": "string"
         },
         "tier": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         },
         "uniqueitem": {
           "default": false,
@@ -290,7 +290,7 @@
           "type": "string"
         },
         "tier": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         },
         "uniqueitem": {
           "default": false,
@@ -338,8 +338,7 @@
           "type": "boolean"
         },
         "itemrank": {
-          "const": 5,
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         },
         "itemtype": {
           "examples": [
@@ -368,10 +367,10 @@
           "type": "string"
         },
         "uses": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         },
         "value": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         }
       },
       "required": [
@@ -427,7 +426,7 @@
           "type": "boolean"
         },
         "value": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         }
       },
       "required": [
@@ -531,15 +530,15 @@
           "type": "string"
         },
         "range": {
-          "default": "1\nAttack range in number of tiles, diagonals count as 1.",
-          "type": "integer"
+          "$ref": "#/definitions/Integer",
+          "default": "1\nAttack range in number of tiles, diagonals count as 1."
         },
         "sprite": {
           "description": "Reference to an entitydef in spritedata/",
           "type": "string"
         },
         "tier": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         },
         "unidName": {
           "description": "Display name",
@@ -659,18 +658,18 @@
           "type": "string"
         },
         "range": {
-          "default": "1\nAttack range in number of tiles, diagonals count as 1.",
-          "type": "integer"
+          "$ref": "#/definitions/Integer",
+          "default": "1\nAttack range in number of tiles, diagonals count as 1."
         },
         "spellpower": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         },
         "sprite": {
           "description": "Reference to an entitydef in spritedata/",
           "type": "string"
         },
         "tier": {
-          "type": "integer"
+          "$ref": "#/definitions/Integer"
         },
         "unidName": {
           "description": "Display name",
@@ -702,6 +701,9 @@
         "value"
       ],
       "type": "object"
+    },
+    "Integer": {
+      "type": "integer"
     }
   }
 }
