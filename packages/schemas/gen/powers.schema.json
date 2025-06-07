@@ -10,6 +10,7 @@
         },
         "class": {
           "const": "dmSpecialPower",
+          "description": "The type of class. Constant.",
           "type": "string"
         },
         "dash": {
@@ -69,6 +70,78 @@
       ],
       "type": "object"
     },
+    "DmPowerSwap": {
+      "additionalProperties": false,
+      "description": "Defines which Dungeonmans-native powers should be replaced by modded powers. For example, to replace the native power `sp_quick_dash` by `sp_modmans_quick_dash`, you set `\"swap_01\": \"sp_modmans_quick_dash\"`.",
+      "properties": {
+        "class": {
+          "const": "dmModPowerSwapList",
+          "description": "The type of class. Constant.",
+          "type": "string"
+        },
+        "swap_01": {
+          "type": "string"
+        },
+        "swap_02": {
+          "type": "string"
+        },
+        "swap_03": {
+          "type": "string"
+        },
+        "swap_04": {
+          "type": "string"
+        },
+        "swap_05": {
+          "type": "string"
+        },
+        "swap_06": {
+          "type": "string"
+        },
+        "swap_07": {
+          "type": "string"
+        },
+        "swap_08": {
+          "type": "string"
+        },
+        "swap_09": {
+          "type": "string"
+        },
+        "swap_10": {
+          "type": "string"
+        },
+        "swap_11": {
+          "type": "string"
+        },
+        "swap_12": {
+          "type": "string"
+        },
+        "swap_13": {
+          "type": "string"
+        },
+        "swap_14": {
+          "type": "string"
+        },
+        "swap_15": {
+          "type": "string"
+        },
+        "swap_16": {
+          "type": "string"
+        },
+        "swap_17": {
+          "type": "string"
+        },
+        "swap_18": {
+          "type": "string"
+        },
+        "swap_19": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "class"
+      ],
+      "type": "object"
+    },
     "DmSpecialPower": {
       "additionalProperties": false,
       "properties": {
@@ -80,6 +153,7 @@
         },
         "class": {
           "const": "dmSpecialPower",
+          "description": "The type of class. Constant.",
           "type": "string"
         },
         "damagemod": {
@@ -145,75 +219,7 @@
             "$ref": "#/definitions/DmPlayerSpecialPower"
           },
           {
-            "additionalProperties": false,
-            "description": "Defines which Dungeonmans-native powers should be replaced by modded powers. For example, to replace the native power `sp_quick_dash` by `sp_modmans_quick_dash`, you set `\"swap_01\": \"sp_modmans_quick_dash\"`.",
-            "properties": {
-              "class": {
-                "const": "dmModPowerSwapList",
-                "type": "string"
-              },
-              "swap_01": {
-                "type": "string"
-              },
-              "swap_02": {
-                "type": "string"
-              },
-              "swap_03": {
-                "type": "string"
-              },
-              "swap_04": {
-                "type": "string"
-              },
-              "swap_05": {
-                "type": "string"
-              },
-              "swap_06": {
-                "type": "string"
-              },
-              "swap_07": {
-                "type": "string"
-              },
-              "swap_08": {
-                "type": "string"
-              },
-              "swap_09": {
-                "type": "string"
-              },
-              "swap_10": {
-                "type": "string"
-              },
-              "swap_11": {
-                "type": "string"
-              },
-              "swap_12": {
-                "type": "string"
-              },
-              "swap_13": {
-                "type": "string"
-              },
-              "swap_14": {
-                "type": "string"
-              },
-              "swap_15": {
-                "type": "string"
-              },
-              "swap_16": {
-                "type": "string"
-              },
-              "swap_17": {
-                "type": "string"
-              },
-              "swap_18": {
-                "type": "string"
-              },
-              "swap_19": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "class"
-            ],
-            "type": "object"
+            "$ref": "#/definitions/DmPowerSwap"
           }
         ]
       },
@@ -225,6 +231,7 @@
       "properties": {
         "class": {
           "const": "dmSpecialPower",
+          "description": "The type of class. Constant.",
           "type": "string"
         },
         "menudescription": {

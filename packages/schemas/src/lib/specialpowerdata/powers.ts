@@ -6,6 +6,7 @@ type WithSummonAlly = {
 };
 
 export type DmSummonPower = {
+  /** The type of class. Constant. */
   class: 'dmSpecialPower';
   /** @examples ["Pete's Lucky Bell"] */
   powername: string;
@@ -14,6 +15,7 @@ export type DmSummonPower = {
 } & WithSummonAlly;
 
 export type DmSpecialPower = {
+  /** The type of class. Constant. */
   class: 'dmSpecialPower';
   /** Display name */
   powername: string;
@@ -41,6 +43,7 @@ export type DmSpecialPower = {
 };
 
 export type DmPlayerSpecialPower = {
+  /** The type of class. Constant. */
   class: 'dmSpecialPower';
   /** Display name */
   powername: string;
@@ -74,7 +77,8 @@ type WithPowerSwap = {
  * For example, to replace the native power `sp_quick_dash` by `sp_modmans_quick_dash`,
  * you set `"swap_01": "sp_modmans_quick_dash"`.
  */
-type DmPowerSwap = {
+export type DmPowerSwap = {
+  /** The type of class. Constant. */
   class: 'dmModPowerSwapList';
 } & WithPowerSwap;
 
