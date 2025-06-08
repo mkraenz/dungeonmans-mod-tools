@@ -1,6 +1,7 @@
 import fs, { Dirent } from 'node:fs';
 import path from 'node:path';
 import { FileSystem, isFile } from '../utils/filesystem.js';
+import { ModContentDirType } from '../utils/mod-content-dirs.js';
 import { EntityName, Filepath } from '../utils/types.js';
 import { EntityRegistry } from './entity.registry.js';
 import { RefRegistry } from './ref.registry.js';
@@ -38,7 +39,9 @@ export class RefScanner {
     const dir = await fs.promises.opendir(this.srcDir);
     await this.traverseDir(dir, async (dirent, direntpath) => {
       if (isFile(dirent, '.json')) {
-        await this.scanFileForRefs(direntpath);
+        // HACK: this is pretty unclean
+        const dirType = direntpath.split(path.sep).at(-2) as ModContentDirType;
+        await this.scanFileForRefs(direntpath, dirType);
       }
     });
   }
@@ -62,7 +65,7 @@ export class RefScanner {
   }
 
   /** Assumption: Every root-level key in the file is the name of an entity. */
-  private async scanFileForRefs(filepath: string) {
+  private async scanFileForRefs(filepath: string, dirType: ModContentDirType) {
     try {
       const json = await this.fs.readJsonFile(filepath);
 
@@ -83,7 +86,12 @@ export class RefScanner {
           this.duplicateEntities.set(name, filepaths);
           return;
         }
-        this.entityRegistry.set(name, { filepath, entity, name });
+        this.entityRegistry.set(name, {
+          filepath,
+          entity,
+          name,
+          dirType,
+        });
       });
       this.refRegistry.setFromEntities(filepath, entities);
     } catch (error) {

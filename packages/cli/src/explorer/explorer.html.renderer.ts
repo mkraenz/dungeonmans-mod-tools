@@ -33,15 +33,19 @@ export class EntityExplorerHtmlRenderer {
                     width: spriteLoc.entity.width,
                     height: spriteLoc.entity.height,
                     texture: spriteLoc.entity.texturename,
+                    xloc: spriteLoc.entity.xloc,
+                    yloc: spriteLoc.entity.yloc,
                   }
                 : { width: 80, height: 128, texture: 'default' };
               return `
               <li class="entity"> 
-                  <img src="${this.srcDir}/textures/${
+                <div style="background-image: url('${this.srcDir}/textures/${
                 imgData.texture
-              }.png" width="${imgData.width}px" height="${
+              }.png'); width: ${imgData.width}px; height: ${
                 imgData.height
-              }px" alt="Monster sprite texture"/>
+              }px; background-position: -${imgData.xloc}px -${
+                imgData.yloc
+              }px;"></div>
                   <h3>${loc.entity.name}</h3>
                   <a href="${loc.filepath}">View source</a>
                   <p>identifier: ${loc.name}</p>

@@ -2,30 +2,13 @@ import path from 'node:path';
 import { SchemaGenerator } from 'src/schemas/schemas.executor.js';
 import { FileSystem } from '../utils/filesystem.js';
 import { Logger } from '../utils/logger.js';
+import { modContentDirs } from '../utils/mod-content-dirs.js';
 import {
   gitignoreTemplate,
   modinfoTemplate,
   readmeTemplate,
 } from './templates/index.js';
 
-const dirs = [
-  'academydata',
-  'actordata',
-  'birdtexturedata',
-  'code',
-  'dungeondata',
-  'encounterdata',
-  'gamesystemdata',
-  'itemdata',
-  'overworldgenerationdata',
-  'plotdata',
-  'setbonusdata',
-  'specialpowerdata',
-  'spritedata',
-  'statuseffectdata',
-  'tabledata',
-  'textures',
-];
 const readmeFilename = 'README.md';
 const modinfoFilename = 'modinfo.txt';
 const gitignoreFilename = '.gitignore';
@@ -73,7 +56,7 @@ export class ModProjectInitializer {
 
     await this.fs.makeDir(srcDir);
 
-    const mkdirPromises = dirs.map((dir) =>
+    const mkdirPromises = modContentDirs.map((dir) =>
       this.fs.makeDir(path.join(srcDir, dir))
     );
     await Promise.all(mkdirPromises);

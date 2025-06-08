@@ -1,7 +1,9 @@
+import { ModContentDirType } from '../utils/mod-content-dirs.js';
 import { EntityName, Filepath } from '../utils/types.js';
 
 export type EntityLocation = {
   filepath: Filepath;
+  dirType: ModContentDirType;
   entity: Record<string, unknown>;
   name: EntityName;
 };
@@ -32,16 +34,24 @@ export class EntityRegistry {
    * Any non-matching entity including those with `class === undefined` will
    * be excluded from the result.
    */
-  filter(
+  queryOnEntity(
     predicate: Record<string, boolean | string | number | null | undefined>
   ): Map<EntityName, EntityLocation> {
     const entityLocs = this.registry.entries().filter(([_, loc]) => {
-      return (
-        typeof loc.entity === 'object' &&
-        Object.entries(predicate).every(
-          ([key, value]) =>
-            (loc.entity as Record<PropertyKey, unknown>)?.[key] === value
-        )
+      return Object.entries(predicate).every(
+        ([key, value]) =>
+          (loc.entity as Record<PropertyKey, unknown>)?.[key] === value
+      );
+    });
+    return new Map(entityLocs);
+  }
+
+  queryOnLoc(
+    predicate: Partial<EntityLocation>
+  ): Map<EntityName, EntityLocation> {
+    const entityLocs = this.registry.entries().filter(([_, loc]) => {
+      return Object.entries(predicate).every(
+        ([key, value]) => loc[key as keyof EntityLocation] === value
       );
     });
     return new Map(entityLocs);

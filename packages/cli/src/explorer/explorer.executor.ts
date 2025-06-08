@@ -45,7 +45,13 @@ export class ExplorerExecutor {
     // Problems:
 
     // - Cyclic dependencies? Probably not an issue. I can't imagine DMans supports that.
-    const monsters = refs.entityRegistry.filter({ class: 'dmMonster' });
+    const monsters = refs.entityRegistry.queryOnEntity({ class: 'dmMonster' });
+    // const encounters = refs.entityRegistry.queryOnEntity({
+    //   class: 'dmEncounterData',
+    // });
+    // const tables = refs.entityRegistry.queryOnLoc({ dirType: 'tabledata' });
+    // console.log(encounters);
+    // console.log(tables);
 
     const explorerView = monsters
       .entries()
