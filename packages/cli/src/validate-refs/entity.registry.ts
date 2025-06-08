@@ -1,6 +1,10 @@
 import { EntityName, Filepath } from '../utils/types.js';
 
-type EntityLocation = { filepath: Filepath; entity: unknown; name: EntityName };
+type EntityLocation = {
+  filepath: Filepath;
+  entity: Record<string, unknown>;
+  name: EntityName;
+};
 
 export class EntityRegistry {
   private registry: Map<EntityName, EntityLocation> = new Map();
