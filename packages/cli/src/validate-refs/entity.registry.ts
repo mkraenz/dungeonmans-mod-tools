@@ -1,6 +1,6 @@
 import { EntityName, Filepath } from '../utils/types.js';
 
-type EntityLocation = {
+export type EntityLocation = {
   filepath: Filepath;
   entity: Record<string, unknown>;
   name: EntityName;

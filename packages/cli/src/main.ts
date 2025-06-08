@@ -3,6 +3,7 @@
 import { Command } from '@commander-js/extra-typings';
 import packagejson from '../package.json' assert { type: 'json' };
 import { createBuildCommand } from './build/build.command.js';
+import { createExperimentalParentCommand } from './explorer/experimental.command.js';
 import { createInitCommand } from './init/init.command.js';
 import { createSchemasCommand } from './schemas/schemas.command.js';
 import { createValidateRefCommand } from './validate-refs/validate-refs.command.js';
@@ -17,7 +18,7 @@ program
   .addCommand(createInitCommand())
   .addCommand(createBuildCommand())
   .addCommand(createSchemasCommand())
-  // .addCommand(createExtractCommand())
+  .addCommand(createExperimentalParentCommand())
   .addCommand(createValidateRefCommand());
 
 program.parse();

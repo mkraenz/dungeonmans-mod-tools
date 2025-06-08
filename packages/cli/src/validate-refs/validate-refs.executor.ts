@@ -10,8 +10,6 @@ type Options = {
   verbose?: boolean;
 };
 
-// TODO trying to make this testable shows that it is probably useful to split between the reporting (i.e. logging), and the results as a datastructure
-
 /**
  * Command line script that receives a directory for scanning and an output directory
  * Scans the given directory including subdirectories for files.

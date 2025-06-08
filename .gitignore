@@ -47,3 +47,4 @@ mods/tsttdemo
 .github/instructions/nx.instructions.md
 
 packages/schemas/gen/test.json
+explorer.html

@@ -3,9 +3,9 @@ import { ExtractValuesFromEntityDefinitionsFileExecutor } from './extract.execut
 
 export const createExtractCommand = () => {
   return new Command()
-    .command('internal__extract')
+    .command('extract')
     .description(
-      '(Internal: Used to extract data from the original game files for schema generation.)'
+      'Used to extract data from the original game files for schema generation. Uses a naive heuristic for extraction.'
     )
     .addHelpText(
       'after',
