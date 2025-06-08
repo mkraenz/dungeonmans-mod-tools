@@ -1,3 +1,20 @@
+## 0.6.0 (2025-06-08)
+
+### 🚀 Features
+
+- **cli:** experimental commands: extract, explorer ([4f8739d](https://github.com/mkraenz/dungeonmans-mod-tools/commit/4f8739d))
+
+### 🩹 Fixes
+
+- **cli:** markdown lint generated readme ([9ea6442](https://github.com/mkraenz/dungeonmans-mod-tools/commit/9ea6442))
+- **js-to-entitydef:** only allow plain objects as entities ([3b88a1b](https://github.com/mkraenz/dungeonmans-mod-tools/commit/3b88a1b))
+- **schemas:** itemrank should be an int ([1e73eaa](https://github.com/mkraenz/dungeonmans-mod-tools/commit/1e73eaa))
+- **schemas:** specialpowers class autocompletion ([52d2f0c](https://github.com/mkraenz/dungeonmans-mod-tools/commit/52d2f0c))
+
+### ❤️ Thank You
+
+- Mirco Kraenz @mkraenz
+
 ## 0.5.0 (2025-06-03)
 
 ### 🚀 Features
