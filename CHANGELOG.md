@@ -1,3 +1,13 @@
+## 0.6.1 (2025-06-08)
+
+### 🩹 Fixes
+
+- **cli:** experimental explorer supports texture atlas ([030dbc6](https://github.com/mkraenz/dungeonmans-mod-tools/commit/030dbc6))
+
+### ❤️ Thank You
+
+- Mirco Kraenz @mkraenz
+
 ## 0.6.0 (2025-06-08)
 
 ### 🚀 Features
