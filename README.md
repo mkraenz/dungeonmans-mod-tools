@@ -152,7 +152,9 @@ Next, run following:
 ```sh
 nx release --skip-publish
 nx run-many -t build
-nx release publish
+nx release publish --otp <2FA code>
+
+git push
 
 # grab version
 CLI_VERSION="v$(cat packages/cli/package.json | jq -r .version)"
