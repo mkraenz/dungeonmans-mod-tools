@@ -1,4 +1,5 @@
 import { identity } from './helpers/identity.js';
+import { isPlainObject } from './helpers/is-plain-object.js';
 
 export type EntityDefKeyValuePairValue = number | boolean | string;
 
@@ -20,6 +21,10 @@ class JsToEntityDefTransformer {
     private readonly keyValuePairs: Record<string, EntityDefKeyValuePairValue>,
     options: Options = {}
   ) {
+    if (!isPlainObject(keyValuePairs))
+      throw new Error(
+        'Validation failed. Provided entity must be a plain object.'
+      );
     this.keyTransform = options.keyTransform ?? defaultOptions.keyTransform;
     this.valueTransform =
       options.valueTransform ?? defaultOptions.valueTransform;
