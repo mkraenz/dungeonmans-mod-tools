@@ -38,6 +38,7 @@ export class EntityTransformer {
   }
 
   transform() {
+    this.transformed = true;
     this.registry.clear();
     let currentEntity: EntityLocation | null = null;
 
