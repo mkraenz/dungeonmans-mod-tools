@@ -3,13 +3,15 @@ import { TokenType } from '../lexer/types.js';
 
 type EntityName = string;
 
-export type EntityLocation = {
+type EntityLocation = {
   filepath: string;
   entity: Record<string, unknown>;
   name: EntityName;
 };
 
-export class JsonTransformer {
+export class EntityTransformer {
+  private transformed: boolean = false;
+
   constructor(
     private readonly tokens: Token[],
     private readonly filepath: string
@@ -17,23 +19,12 @@ export class JsonTransformer {
 
   private registry: Map<EntityName, EntityLocation> = new Map();
 
-  has(name: string) {
-    return this.registry.has(name);
-  }
-
-  set(name: string, loc: EntityLocation) {
-    this.registry.set(name, loc);
-  }
-
-  get(name: string) {
-    return this.registry.get(name);
-  }
-
-  toString() {
-    return JSON.stringify([...this.registry]);
-  }
-
   toArray() {
+    if (!this.transformed)
+      throw new Error(
+        'You must call .transform(..) before calling .toArray().'
+      );
+
     return this.registry
       .entries()
       .toArray()
@@ -41,6 +32,8 @@ export class JsonTransformer {
   }
 
   toMap() {
+    if (!this.transformed)
+      throw new Error('You must call .transform(..) before calling .toMap().');
     return new Map(this.registry.entries());
   }
 

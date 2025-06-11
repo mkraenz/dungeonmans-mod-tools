@@ -67,18 +67,23 @@ npx nx graph
 
 ### Low-level
 
-- 🟡 [EntityDef Lexer](libs/entity-def-compiler/src/lib/lexer/Lexer.realworld.spec.ts)
+- 🟢 [EntityDef Lexer](packages/entitydef-compiler/src/lib/lexer/Lexer.ts)
   - Turns Entity Def txt files into tokens for further analysis, etc.
-  - Usable: 🟡
-    - Several results from real world entityDef examples are shown in the [spec files](libs/entity-def-compiler/src/lib/lexer/Lexer.realworld.spec.ts). Before I can put a 🟢 on this though, I would need to battle test it by using other tools built on top of this, clarify some remaining questions regarding the syntax of entityDefs, and package it into a lib for anyone else to use.
+  - Usable: 🟢
+    - Several results from real world entityDef examples are shown in the [spec files](packages/entitydef-compiler/src/lib/lexer/Lexer.realworld.spec.ts).
   - TODO
-    - tokenize `WhitespaceTrivia` (to create Concrete Syntax Tree)
-    - allow comments `// ignore all this` (again, tokenize `CommentTrivia`)
-- 🔴 [EntityDef Parser](libs/entity-def-compiler/src/lib/ast-parser/Parser.ts)
+    - tokenize `WhitespaceTrivia` (necessary for Concrete Syntax Tree)
+    - normalize line numbers, particularly EOL is always displayed as being on the next line. So a file that starts with an empty line will tokenize to EOL line 2:0, which is unexpected.
+- 🟢 [EntityDef EntityTransformer](packages/entitydef-compiler/src/lib/entity-transformer/EntityTransformer.ts:1)
+  - Leverages tokens created by Lexer to create JS objects/maps from Entity Def txt files.
+  - Usable: 🟢
+- 🔴 [Parser into Syntax Tree](libs/entity-def-compiler/src/lib/ast-parser/Parser.ts)
   - Leverages tokens created by Lexer to create a Syntax Tree
   - TODO
     - research good libs for AST node creation that also supports operations on those nodes
     - implementation (see unfinished/skipped test cases in spec file)
+  - Question:
+    - Should we abandon the parser into an AST/CST? By now, we are running with a completely different approach based on working in JSON files. Which means we don't really need this.
 
 ## Development
 

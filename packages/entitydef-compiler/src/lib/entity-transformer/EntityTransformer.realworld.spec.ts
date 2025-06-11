@@ -1,5 +1,5 @@
 import { Lexer } from '../lexer/Lexer.js';
-import { JsonTransformer } from './EntityTransformer.js';
+import { EntityTransformer } from './EntityTransformer.js';
 
 it('works for a sprite entityDef', () => {
   // from https://dungeonmans.fandom.com/wiki/Mods:_Adding_Monsters
@@ -13,7 +13,7 @@ it('works for a sprite entityDef', () => {
 }`;
   const lexer = new Lexer(source);
   lexer.tokenize();
-  const transform = new JsonTransformer(lexer.tokens, 'somefilepath');
+  const transform = new EntityTransformer(lexer.tokens, 'somefilepath');
 
   transform.transform();
 
@@ -71,7 +71,7 @@ it('works for a monster entityDef', () => {
 }`;
   const lexer = new Lexer(source);
   lexer.tokenize();
-  const transform = new JsonTransformer(lexer.tokens, 'somefilepath');
+  const transform = new EntityTransformer(lexer.tokens, 'somefilepath');
 
   transform.transform();
 
@@ -118,7 +118,7 @@ it('works for monster tables', () => {
 }`;
   const lexer = new Lexer(source);
   lexer.tokenize();
-  const transform = new JsonTransformer(lexer.tokens, 'somefilepath');
+  const transform = new EntityTransformer(lexer.tokens, 'somefilepath');
 
   transform.transform();
 
@@ -153,7 +153,7 @@ it('works for tables using results from other tables', () => {
  }`;
   const lexer = new Lexer(source);
   lexer.tokenize();
-  const transform = new JsonTransformer(lexer.tokens, 'somefilepath');
+  const transform = new EntityTransformer(lexer.tokens, 'somefilepath');
 
   transform.transform();
 
@@ -182,7 +182,7 @@ it('works for banter with code-driven substitution', () => {
 }`;
   const lexer = new Lexer(source);
   lexer.tokenize();
-  const transform = new JsonTransformer(lexer.tokens, 'somefilepath');
+  const transform = new EntityTransformer(lexer.tokens, 'somefilepath');
 
   transform.transform();
 
@@ -352,7 +352,7 @@ entityDef "purpleonian_centaur"
 
   const lexer = new Lexer(source);
   lexer.tokenize();
-  const transform = new JsonTransformer(lexer.tokens, 'somefilepath');
+  const transform = new EntityTransformer(lexer.tokens, 'somefilepath');
 
   transform.transform();
 
