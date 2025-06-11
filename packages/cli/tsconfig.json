@@ -4,6 +4,9 @@
   "include": [],
   "references": [
     {
+      "path": "../entitydef-compiler"
+    },
+    {
       "path": "../js-to-entitydef"
     },
     {

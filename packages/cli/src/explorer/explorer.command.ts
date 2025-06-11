@@ -15,7 +15,7 @@ export const createExplorerCommand = () => {
     .option('--verbose', 'Print additional info.')
     .option('--debug', 'Print addditional debug info. Implies --verbose.')
     .action(async (srcDir, options) => {
-      const validator = new ExplorerExecutor(srcDir, options);
-      await validator.run();
+      const executor = new ExplorerExecutor(srcDir, options);
+      await executor.run();
     });
 };

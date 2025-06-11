@@ -22,11 +22,11 @@ export const createExtractCommand = () => {
     .argument('<propertyKey>', 'Which property key to extract')
     .option('--verbose', 'Print additional info.')
     .action(async (directory, propertyKey, options) => {
-      const initializer = new ExtractValuesFromEntityDefinitionsFileExecutor(
+      const executor = new ExtractValuesFromEntityDefinitionsFileExecutor(
         directory,
         propertyKey,
         options
       );
-      await initializer.run();
+      await executor.run();
     });
 };

@@ -22,6 +22,9 @@
   ],
   "references": [
     {
+      "path": "../entitydef-compiler/tsconfig.lib.json"
+    },
+    {
       "path": "../js-to-entitydef/tsconfig.lib.json"
     }
   ]
