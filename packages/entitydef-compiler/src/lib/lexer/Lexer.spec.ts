@@ -160,3 +160,96 @@ it(`works for ranged damage 'rangedDamage_01 fire,2d8+30,0'`, () => {
     'EOF  1:30 - 1:30',
   ]);
 });
+
+describe('comments', () => {
+  it('works for comments at the beginning of the file', () => {
+    const source = `// 1H Hammer Special Attacks //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+entityDef "sp_rib_cracker"
+{
+	class		dmSpecialPower
+}`;
+    const lexer = new Lexer(source);
+
+    lexer.tokenize();
+
+    expect(lexer.tokens.map((t) => t.prettyPrint(source))).toEqual([
+      'COMMENT // 1H Hammer Special Attacks ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 1:1 - 1:148',
+      'EOL  2:0 - 2:1',
+      'ENTITY_DEF entityDef 2:1 - 2:10',
+      'STRING "sp_rib_cracker" 2:11 - 2:27',
+      'EOL  3:0 - 3:1',
+      'LEFT_BRACE { 3:1 - 3:2',
+      'EOL  4:0 - 4:1',
+      'IDENTIFIER class 4:2 - 4:7',
+      'IDENTIFIER dmSpecialPower 4:9 - 4:23',
+      'EOL  5:0 - 5:1',
+      'RIGHT_BRACE } 5:1 - 5:2',
+      'EOF  5:2 - 5:2',
+    ]);
+  });
+
+  it('works for comments in the center of the file', () => {
+    const source = `entityDef "sp_rib_cracker"
+    // stuff
+{`;
+    const lexer = new Lexer(source);
+
+    lexer.tokenize();
+
+    expect(lexer.tokens.map((t) => t.prettyPrint(source))).toEqual([
+      'ENTITY_DEF entityDef 1:1 - 1:10',
+      'STRING "sp_rib_cracker" 1:11 - 1:27',
+      'EOL  2:0 - 2:1',
+      'COMMENT // stuff 2:5 - 2:13',
+      'EOL  3:0 - 3:1',
+      'LEFT_BRACE { 3:1 - 3:2',
+      'EOF  3:2 - 3:2',
+    ]);
+  });
+
+  it('works for comments at the end of the file', () => {
+    const source = `entityDef "sp_rib_cracker"
+    // stuff`;
+    const lexer = new Lexer(source);
+
+    lexer.tokenize();
+
+    expect(lexer.tokens.map((t) => t.prettyPrint(source))).toEqual([
+      'ENTITY_DEF entityDef 1:1 - 1:10',
+      'STRING "sp_rib_cracker" 1:11 - 1:27',
+      'EOL  2:0 - 2:1',
+      'COMMENT // stuff 2:5 - 2:13',
+      'EOF  2:13 - 2:13',
+    ]);
+  });
+
+  it('works for multiple comments in a row', () => {
+    const source = `
+//===
+//
+// Actually...
+//
+//====
+
+`;
+    const lexer = new Lexer(source);
+
+    lexer.tokenize();
+
+    expect(lexer.tokens.map((t) => t.prettyPrint(source))).toEqual([
+      'EOL  2:0 - 2:1',
+      'COMMENT //=== 2:1 - 2:6',
+      'EOL  3:0 - 3:1',
+      'COMMENT // 3:1 - 3:3',
+      'EOL  4:0 - 4:1',
+      'COMMENT // Actually... 4:1 - 4:15',
+      'EOL  5:0 - 5:1',
+      'COMMENT // 5:1 - 5:3',
+      'EOL  6:0 - 6:1',
+      'COMMENT //==== 6:1 - 6:7',
+      'EOL  7:0 - 7:1',
+      'EOL  8:0 - 8:1',
+      'EOF  8:1 - 8:1',
+    ]);
+  });
+});

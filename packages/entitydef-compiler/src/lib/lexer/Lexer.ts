@@ -40,7 +40,6 @@ export class Lexer {
         return this.stringToken();
       case '-':
         return this.numberOrString();
-
       case ' ':
       case '\r':
       case '\t':
@@ -50,10 +49,20 @@ export class Lexer {
         this.addToken('EOL');
         this.line++;
         return;
+      // @ts-expect-error -- we want to fall through
+      case '/':
+        if (this.peek() === '/') {
+          return this.lineCommentToken();
+        }
       default:
         if (isDigit(char)) return this.numberOrString();
         if (isAlpha(char)) return this.identifier();
     }
+  }
+
+  private lineCommentToken() {
+    while (this.peek() !== '\n' && !this.isAtEnd()) this.advance();
+    return this.addToken('COMMENT');
   }
 
   private addEOF() {

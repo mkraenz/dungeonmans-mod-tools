@@ -26,6 +26,7 @@ export type TokenType =
   | 'LEFT_BRACE'
   | 'WHITESPACE' // spaces, tabs, carriage returns, but *not* line breaks
   | 'RIGHT_BRACE'
+  | 'COMMENT'
   | LiteralTokenType
   | 'EOL'
   | 'EOF';

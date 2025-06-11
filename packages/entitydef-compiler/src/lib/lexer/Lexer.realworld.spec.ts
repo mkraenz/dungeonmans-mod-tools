@@ -264,12 +264,11 @@ it('works for tables using results from other tables', () => {
   ]);
 });
 
-it('works banter with code-driven substitution', () => {
+it('works for banter with code-driven substitution', () => {
   const source = `entityDef "decoy_not_fooled_banter_common"
 {
 	"^5[s1]^7 chuckles: ^3Fool me once...!^7"									1
 }`;
-
   const lexer = new Lexer(source);
 
   lexer.tokenize();
