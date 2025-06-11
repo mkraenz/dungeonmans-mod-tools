@@ -30,4 +30,3 @@ export type TokenType =
   | LiteralTokenType
   | 'EOL'
   | 'EOF';
-/** TODO @playdungeonmans can there be comments? -- yes! Comments use java-style `//` */

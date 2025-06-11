@@ -197,7 +197,7 @@ it('works for monster tables', () => {
     'IDENTIFIER encounter_list_scrobold_03 5:16 - 5:42',
     'EOL  6:0 - 6:1',
     'EOL  7:0 - 7:1',
-    'STRING "one_modmold" 7:2 - 7:15', // keys can apparently also be quoted sometimes. TODO @playdungeonmans is there any difference between quoted keys and unquoted keys?
+    'STRING "one_modmold" 7:2 - 7:15',
     'NUMBER 10 7:17 - 7:19',
     'EOL  8:0 - 8:1',
     'STRING "some_modmolds" 8:2 - 8:17',

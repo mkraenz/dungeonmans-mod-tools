@@ -4,7 +4,7 @@ import type { TokenType } from './types.js';
 export class Lexer {
   static keywords = new Map<string, TokenType>([
     ['entityDef', 'ENTITY_DEF'],
-    ['entitydef', 'ENTITY_DEF'], // TODO @playdungeonmans whether entitydef is case sensitive
+    ['entitydef', 'ENTITY_DEF'],
     ['true', 'TRUE'],
     ['false', 'FALSE'],
   ]);
