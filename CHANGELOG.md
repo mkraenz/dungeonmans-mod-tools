@@ -1,3 +1,15 @@
+## 0.7.0 (2025-06-11)
+
+### 🚀 Features
+
+- **cli:** new command to parse entitydef txt files to JSON ([5df7244](https://github.com/mkraenz/dungeonmans-mod-tools/commit/5df7244))
+- **entitydef-compiler:** Lexer and Transform to JS entities works including handling of comments ([54a9e04](https://github.com/mkraenz/dungeonmans-mod-tools/commit/54a9e04))
+- **entitydef-compiler:** expose Lexer and EntityTransformer ([f194886](https://github.com/mkraenz/dungeonmans-mod-tools/commit/f194886))
+
+### ❤️ Thank You
+
+- Mirco Kraenz @mkraenz
+
 ## 0.6.1 (2025-06-08)
 
 ### 🩹 Fixes
