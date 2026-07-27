@@ -10,7 +10,7 @@ type EntityLocation = {
 };
 
 export class EntityTransformer {
-  private transformed: boolean = false;
+  private transformed = false;
 
   constructor(
     private readonly tokens: Token[],

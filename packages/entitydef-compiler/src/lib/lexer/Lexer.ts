@@ -49,11 +49,13 @@ export class Lexer {
         this.addToken('EOL');
         this.line++;
         return;
-      // @ts-expect-error -- we want to fall through
       case '/':
         if (this.peek() === '/') {
           return this.lineCommentToken();
         }
+        if (isDigit(char)) return this.numberOrString();
+        if (isAlpha(char)) return this.identifier();
+        return;
       default:
         if (isDigit(char)) return this.numberOrString();
         if (isAlpha(char)) return this.identifier();
