@@ -64,10 +64,13 @@
     }
   },
   "release": {
-    "releaseTagPattern": "v{version}",
     "version": {
       "preVersionCommand": "npx nx run-many -t build",
       "conventionalCommits": true
+    },
+    "releaseTag": {
+      "pattern": "v{version}"
     }
-  }
+  },
+  "analytics": false
 }
