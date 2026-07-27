@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from '@commander-js/extra-typings';
-import packagejson from '../package.json' assert { type: 'json' };
+import packagejson from '../package.json' with { type: 'json' };
 import { createBuildCommand } from './build/build.command.js';
 import { createExperimentalParentCommand } from './explorer/experimental.command.js';
 import { createInitCommand } from './init/init.command.js';
