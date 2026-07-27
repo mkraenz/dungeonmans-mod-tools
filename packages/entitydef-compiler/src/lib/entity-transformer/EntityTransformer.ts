@@ -3,10 +3,53 @@ import { TokenType } from '../lexer/types.js';
 
 type EntityName = string;
 
-type EntityLocation = {
+const nonmappedContentDirs = [
+  'animdata',
+  'audio',
+  'bakedroomdata',
+  'craftedmaps',
+  'cryptareadata',
+  'defaultmonsterstats',
+  'fx',
+  'generatordata',
+  'herodata',
+  'monsterknowledge',
+  'particleeffectdata',
+  'roadblocks',
+  'specialbakedroomdata',
+  'spritefont',
+  'tiledata',
+  'towerfloordata',
+  'townbuildingdata',
+  'townlayoutdata',
+  'xna game studio',
+  'UNKNOWN', // This is a catch-all for directories in case the folder structure changes. remember, we are a downstream client of dmans
+] as const;
+/** Unlike unmappedContentDirs, these directories have an obvious equivalent for the mod folder structure */
+export const mappedVanillaContentDirs = [
+  'actordata',
+  'encounters',
+  'gamesystemdata',
+  'itemdata',
+  'overworldgenerationdata',
+  'plotthreaddata',
+  'setbonuses',
+  'spritedata',
+  'statuseffectdata',
+  'tables',
+  'textures',
+] as const;
+const allVaniallaContentDirs = [
+  ...nonmappedContentDirs,
+  ...mappedVanillaContentDirs,
+];
+export type DmVanillaDirType = (typeof allVaniallaContentDirs)[number];
+
+export type EntityLocation = {
   filepath: string;
   entity: Record<string, unknown>;
   name: EntityName;
+  dirType: DmVanillaDirType;
 };
 
 export class EntityTransformer {
@@ -53,7 +96,17 @@ export class EntityTransformer {
 
       if (token.type === 'ENTITY_DEF') {
         // start a new entity
-        currentEntity = { filepath: this.filepath, entity: {}, name: '' };
+        // this is a heuristic. if there are sub-dirs that match some top-level directory, then this may break. Let's hope there aren't.
+        const dirType =
+          mappedVanillaContentDirs.find((dir) =>
+            this.filepath.toLowerCase().includes(dir)
+          ) ?? 'UNKNOWN';
+        currentEntity = {
+          filepath: this.filepath,
+          entity: {},
+          name: '',
+          dirType,
+        };
       } else if (token.type === 'STRING' && prevToken?.type === 'ENTITY_DEF') {
         if (currentEntity) {
           currentEntity.name = removeSurroundingDoubleQuotes(token.lexeme);
