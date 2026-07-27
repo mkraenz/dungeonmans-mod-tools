@@ -6,8 +6,8 @@
     "nx": "nx"
   },
   "engines": {
-    "npm": ">=9.0.0",
-    "node": ">=22.0.0"
+    "npm": ">=11.11.0",
+    "node": ">=22.13.1"
   },
   "private": true,
   "devDependencies": {
