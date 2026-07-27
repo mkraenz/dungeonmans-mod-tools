@@ -55,7 +55,7 @@ export class ExplorerExecutor {
 
     const explorerView = monsters
       .entries()
-      .map(([key, originalMonsterLoc]) => {
+      .map(([_key, originalMonsterLoc]) => {
         const monsterLoc = cloneDeep(originalMonsterLoc);
         Object.entries(monsterLoc.entity as Record<string, any>).forEach(
           ([key, value]) => {
