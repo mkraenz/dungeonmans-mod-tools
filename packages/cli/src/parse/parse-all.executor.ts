@@ -38,26 +38,61 @@ export class ParseAllExecutor {
     );
     const files = allFilesAndDirsRecursive.filter((x) => x.isFile());
 
-    const entitiesPromise = await Promise.all(
+    const entitiesByFile = await Promise.all(
       files.map(async (file) =>
         this.processFile(join(file.parentPath, file.name))
       )
     );
-    const allEntities = entitiesPromise.reduce<EntityLoc[]>(
+    const allEntities = entitiesByFile.reduce<EntityLoc[]>(
       (acc, next) => [...acc, ...next.toArray()],
       []
     );
-    const entities = new Map<string, EntityLoc['entity']>(
-      allEntities.map((loc) => [loc.name, loc])
-    );
+    console.log(allEntities.filter((loc) => loc.name === 'toxic_trampler'));
+    // TODO FIXME: turning this into a map by loc.name causes some duplicate names to be lost, e.g. toxic_trampler exists as sprite and as monster
+    const entities = new Map(allEntities.map((loc) => [loc.name, loc]));
 
+    // this.fs.writeFile(
+    //   this.outFilepath,
+    //   JSON.stringify(Object.fromEntries(entities), null, 2)
+    // );
+    // Logger.log(
+    //   `Written ${entities.size} parsed entities to ${this.outFilepath}.`
+    // );
+
+    const monsters = entities
+      .values()
+      .filter(
+        (loc) => loc.dirType === 'actordata' && loc.entity.class === 'dmMonster'
+      );
+    // this.fs.writeFile(
+    //   this.outFilepath,
+    //   JSON.stringify(Object.fromEntries(monsters), null, 2)
+    // );
+    // Logger.log(
+    //   `Written ${monsters} parsed entities to ${this.outFilepath}.`
+    // );
+    const monsterSchemaHelper = monsters.reduce<
+      Record<PropertyKey, Set<unknown>>
+    >((acc, next) => {
+      Object.keys(next.entity).forEach((key) => {
+        acc[key] ??= new Set();
+        acc[key].add(next.entity[key]);
+      });
+      return acc;
+    }, {});
+    console.log(`Monster schema helper:`, monsterSchemaHelper['class']);
     this.fs.writeFile(
       this.outFilepath,
-      JSON.stringify(Object.fromEntries(entities), null, 2)
+      JSON.stringify(
+        monsterSchemaHelper,
+        (key, value) => {
+          if (value instanceof Set) return value.values().toArray();
+          return value;
+        },
+        2
+      )
     );
-    Logger.log(
-      `Written ${entities.size} parsed entities to ${this.outFilepath}.`
-    );
+    Logger.log(`Written to ${this.outFilepath}.`);
   }
 
   private async processFile(filepath: string) {
