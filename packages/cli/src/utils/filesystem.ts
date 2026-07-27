@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import fs, { Dirent } from 'node:fs';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 import { Logger } from './logger.js';
@@ -47,6 +47,35 @@ export class FileSystem {
     if (this.verbose) Logger.log('READ FILE:', filepath);
     const contents = await fsp.readFile(filepath, 'utf-8');
     return JSON.parse(contents);
+  }
+
+  async lsDirRecursive(
+    dirPath: string,
+    predicate: (dirent: Dirent) => boolean = () => true,
+    maxDepth = 10
+  ) {
+    if (maxDepth <= 0) {
+      Logger.warn(
+        `Max depth of 10 reached while listing directory: ${dirPath}`
+      );
+      return [];
+    }
+    if (this.verbose) Logger.log('LIST DIR RECURSIVE:', dirPath);
+    const dir = await fsp.opendir(dirPath);
+    const files: Dirent[] = [];
+    for await (const dirent of dir) {
+      if (dirent.isDirectory()) {
+        const entries = await this.lsDirRecursive(
+          path.join(dirPath, dirent.name),
+          predicate,
+          maxDepth - 1
+        );
+        files.push(...entries);
+      } else {
+        if (predicate(dirent)) files.push(dirent);
+      }
+    }
+    return files;
   }
 
   exists = fs.existsSync;
