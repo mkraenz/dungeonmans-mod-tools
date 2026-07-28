@@ -15,5 +15,8 @@
     {
       "path": "./packages/entitydef-compiler"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0"
+  }
 }

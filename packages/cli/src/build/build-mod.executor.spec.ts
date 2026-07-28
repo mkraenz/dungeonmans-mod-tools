@@ -5,7 +5,7 @@ import { ModBuilder } from './build-mod.executor.js';
 
 let fs: FileSystem;
 
-const dirName = __dirname;
+const dirName = import.meta.dirname;
 const srcDir = path.join(dirName, 'test', 'input', 'src');
 const tmpSrcDir = path.join(dirName, 'test', 'input-tmp', 'src');
 const outDir = path.join(dirName, 'test', 'out');
