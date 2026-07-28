@@ -4,7 +4,9 @@
     "outDir": "./out-tsc/jest",
     "types": ["jest", "node"],
     "forceConsistentCasingInFileNames": true,
-    "noImplicitOverride": true
+    "noImplicitOverride": true,
+    "ignoreDeprecations": "6.0",
+    "rootDir": "."
   },
   "include": [
     "jest.config.ts",

@@ -8,7 +8,8 @@
     "types": ["node"],
     "forceConsistentCasingInFileNames": true,
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
-    "emitDeclarationOnly": false
+    "emitDeclarationOnly": false,
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src/**/*.ts"],
   "exclude": [
