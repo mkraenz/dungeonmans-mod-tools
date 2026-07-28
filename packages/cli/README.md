@@ -20,7 +20,7 @@ Dungeonmans defines most content in a custom **plain text format** called **Enti
 
 ## Prerequisites
 
-You may need Node v22+.
+You may need Node v24+.
 
 Works on Ubuntu and Windows (at least with Git Bash).
 

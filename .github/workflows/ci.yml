@@ -17,8 +17,9 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
+          filter: tree:0
           fetch-depth: 0
 
       # This enables task distribution via Nx Cloud
@@ -28,13 +29,14 @@ jobs:
       # - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="build"
 
       # Cache node_modules
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24.18.0
           cache: 'npm'
 
-      - run: npm ci --legacy-peer-deps
-      - uses: nrwl/nx-set-shas@v4
+      - run: npm ci
+
+      - uses: nrwl/nx-set-shas@v5
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World

@@ -5,9 +5,10 @@ import { ModBuilder } from './build-mod.executor.js';
 
 let fs: FileSystem;
 
-const srcDir = path.join(__dirname, 'test', 'input', 'src');
-const tmpSrcDir = path.join(__dirname, 'test', 'input-tmp', 'src');
-const outDir = path.join(__dirname, 'test', 'out');
+const dirName = __dirname;
+const srcDir = path.join(dirName, 'test', 'input', 'src');
+const tmpSrcDir = path.join(dirName, 'test', 'input-tmp', 'src');
+const outDir = path.join(dirName, 'test', 'out');
 
 beforeEach(async () => {
   fs = new FileSystem({});
@@ -51,7 +52,7 @@ entityDef "tstt_actor_another"
 
   it('emits the output with refs stripped', async () => {
     const outfile = 'monsters-with-ref.txt';
-    const outDir = path.join(__dirname, 'test', 'out');
+    const outDir = path.join(dirName, 'test', 'out');
     const emittedFilePath = path.join(outDir, 'actordata', outfile);
     const builder = new ModBuilder(srcDir, outDir);
 
@@ -67,7 +68,7 @@ entityDef "tstt_actor_another"
 
   it('emits the output with refs stripped from keys', async () => {
     const outfile = 'monsters-with-ref-in-key.txt';
-    const outDir = path.join(__dirname, 'test', 'out');
+    const outDir = path.join(dirName, 'test', 'out');
     const emittedFilePath = path.join(outDir, 'actordata', outfile);
     const builder = new ModBuilder(srcDir, outDir);
 
@@ -83,7 +84,7 @@ entityDef "tstt_actor_another"
 
   it('emits the output with refs stripped from both keys and values', async () => {
     const outfile = 'monsters-with-ref-in-key-and-val.txt';
-    const outDir = path.join(__dirname, 'test', 'out');
+    const outDir = path.join(dirName, 'test', 'out');
     const emittedFilePath = path.join(outDir, 'actordata', outfile);
     const builder = new ModBuilder(srcDir, outDir);
 
@@ -101,7 +102,7 @@ entityDef "tstt_actor_another"
 describe('C# csharp', () => {
   it('copies .cs files ', async () => {
     const outfile = 'myscript.cs';
-    const outDir = path.join(__dirname, 'test', 'out');
+    const outDir = path.join(dirName, 'test', 'out');
     const emittedFilePath = path.join(outDir, 'code', outfile);
     const srcfile = path.join(srcDir, 'code', outfile);
     const builder = new ModBuilder(srcDir, outDir);
@@ -117,7 +118,7 @@ describe('C# csharp', () => {
 describe('Plain text', () => {
   it('copies .txt files in src dir', async () => {
     const outfile = 'modinfo.txt';
-    const outDir = path.join(__dirname, 'test', 'out');
+    const outDir = path.join(dirName, 'test', 'out');
     const emittedFilePath = path.join(outDir, outfile);
     const srcfile = path.join(srcDir, outfile);
     const builder = new ModBuilder(srcDir, outDir);
@@ -131,7 +132,7 @@ describe('Plain text', () => {
 
   it('copies .txt files in sub dirs of src dir', async () => {
     const outfile = 'plaintext-monsters.txt';
-    const outDir = path.join(__dirname, 'test', 'out');
+    const outDir = path.join(dirName, 'test', 'out');
     const emittedFilePath = path.join(outDir, 'actordata', outfile);
     const srcfile = path.join(srcDir, 'actordata', outfile);
     const builder = new ModBuilder(srcDir, outDir);
