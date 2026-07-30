@@ -38,6 +38,11 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v5
 
+      # dependabot PRs do not run with gh secrets so it does not have the nx accesst token
+      - name: Disable Nx Cloud for Dependabot
+        if: github.actor == 'dependabot[bot]'
+        run: echo "NX_NO_CLOUD=true" >> $GITHUB_ENV
+
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
       # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
