@@ -1,3 +1,14 @@
+## 0.7.1 (2026-07-30)
+
+### 🩹 Fixes
+
+- **cli:** entitydef-compiler: EntityTransformer always fails due to missing flag ([d68548c](https://github.com/mkraenz/dungeonmans-mod-tools/commit/d68548c))
+- **cli:** after nx+ts bump, ts compilation fails ([f66fd7c](https://github.com/mkraenz/dungeonmans-mod-tools/commit/f66fd7c))
+
+### ❤️ Thank You
+
+- Mirco Kraenz @mkraenz
+
 ## 0.7.0 (2025-06-11)
 
 ### 🚀 Features

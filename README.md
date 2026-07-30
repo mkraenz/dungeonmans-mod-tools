@@ -147,7 +147,7 @@ A package may depend on another package. If the dependency is buildable, it may 
 Start by running verdaccio (local package registry) via
 
 ```sh
-nx run @dungeonmans-mod-tools/source:local-registry
+nx run @dungeonmans-mod-tools/root:local-registry
 ```
 
 You can open [http://localhost:4873/](http://localhost:4873/) to see the packages in the registry.
