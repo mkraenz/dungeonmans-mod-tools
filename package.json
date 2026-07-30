@@ -6,7 +6,7 @@
     "nx": "nx"
   },
   "engines": {
-    "node": ">=24.18.0"
+    "node": ">=24.18.1"
   },
   "packageManager": "npm@11.16.0",
   "private": true,
@@ -39,7 +39,7 @@
     "tslib": "^2.3.0",
     "typescript": "6.0.3",
     "typescript-eslint": "8.65.0",
-    "verdaccio": "6.9.0",
+    "verdaccio": "6.1.6",
     "webpack-cli": "7.2.1",
     "jest-util": "30.0.5",
     "webpack": "5.109.1"
