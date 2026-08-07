@@ -157,9 +157,15 @@ Next, run following:
 ```sh
 nx release --skip-publish
 nx run-many -t build
-nx release publish --otp <2FA code>
+nx release publish --regis  try http://localhost:4873
+# Inspect the results in Verdaccio, potentially running the CLI tool with
+# npx @dungeonmans-mod-tools/cli --version
+
+# If you are ready for the public release, continue.
 
 git push
+
+nx release publish --registry https://registry.npmjs.org --otp <2FA code>
 
 # grab version
 CLI_VERSION="v$(cat packages/cli/package.json | jq -r .version)"
