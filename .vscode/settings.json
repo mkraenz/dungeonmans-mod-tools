@@ -49,5 +49,6 @@
       "url": "https://raw.githubusercontent.com/mkraenz/dungeonmans-mod-tools/refs/heads/main/packages/schemas/gen/encounter-tables.schema.json"
     }
   ],
-  "nxConsole.generateAiAgentRules": true
+  "nxConsole.generateAiAgentRules": true,
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
 }
