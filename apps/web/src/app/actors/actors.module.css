@@ -1,0 +1,15 @@
+.encounter {
+  padding: 1rem;
+}
+
+.actorList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.actorPortrait {
+  box-sizing: content-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}

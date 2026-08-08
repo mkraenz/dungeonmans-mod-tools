@@ -1,0 +1,28 @@
+{
+  "tstt_mon_orkleader": {
+    "class": "dmMonster",
+    "sprite": "@ref(tstt_sprite_orkleader)",
+    "attack_sfx": "monster_attack_claw",
+    "banter": "orc",
+    "base_defeatarmor": 8,
+    "basicattackparticle": "particle_attack_weapon_pierce",
+    "bBlockTileEntry": true,
+    "cointype": "copper_coins_huge",
+    "hasRanged": false,
+    "health": 2,
+    "knowledge": "orcs",
+    "level": 4,
+    "meleedamage_01": "melee,3d3,0",
+    "meleedamage_02": "poison,1,0",
+    "name": "Lurtz, Cold-Blooded Leader of the Uruk-Hai",
+    "nametable": "orc_name_chart",
+    "scale_adjustdamage": 1.1,
+    "scale_adjusthealth": 1.1,
+    "scale_max": 8,
+    "scale_min": 4,
+    "armor": 8,
+    "parry": 8,
+    "block": 2,
+    "dodge": 8
+  }
+}
