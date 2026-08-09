@@ -7,6 +7,7 @@ import {
   DmSprites,
 } from '@dungeonmans-mod-tools/schemas';
 import { attempt, isError } from 'lodash-es';
+import { unpackToContent } from 'xnb';
 
 const DMANS_TEXTURE_DIR = 'textures';
 
@@ -23,11 +24,13 @@ const dereference = (raw: string) => {
   return raw.replace('@ref(', '').replace(')', '');
 };
 const Portrait: FC<PortraitProps> = ({ actor, sprite, textures }) => {
-  const dataUrl = textures[sprite.texturename]?.dataUrl;
+  // vanilla dmans has its sprite definitions with textures/texturename while mods leave out the textures/ prefix.
+  const textureName = sprite.texturename?.replace('textures/', '');
+  const dataUrl = textures[textureName]?.dataUrl;
   return (
     <article>
       <p>{actor.name}</p>
-      <p>{sprite.texturename}</p>
+      <p>{textureName}</p>
       <div
         className={styles.actorPortrait}
         style={{
@@ -124,6 +127,31 @@ const Actors: FC = () => {
                   dataUrl: await toDataUrl(file),
                   name,
                 };
+                break;
+              }
+              default: {
+                if ((subDirEntry.name as string).endsWith('.xnb')) {
+                  try {
+                    const name = (subDirEntry.name as string).replace(
+                      '.xnb',
+                      ''
+                    );
+                    console.log('Trying to turn XNB into png');
+                    const content = await unpackToContent(file);
+                    console.log('CONVERTED FROM XNB SUCCESSFULLY!');
+                    const dataUrl = window.URL.createObjectURL(content.content);
+                    textureRegistry[name] = {
+                      dataUrl,
+                      name,
+                    };
+                  } catch (error) {
+                    console.warn(
+                      `Failed to process ${subDirEntry.name}. Some xnb files may be for different things than images, so this may be alright.`
+                    );
+                  }
+                } else {
+                  console.warn(`File type "${file.type}" not supported.`);
+                }
                 break;
               }
             }
