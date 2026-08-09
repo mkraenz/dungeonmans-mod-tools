@@ -57,7 +57,6 @@ export class ConvertVanillaToJsonDirectoryStructureExecutor {
     );
     const entityFilesByOutdir = groupBy(entitiesByFile, (x) => x.outDir);
     await this.fs.makeDir(this.outDirPath);
-
     await this.fs.makeDirMany(Object.keys(entityFilesByOutdir));
     let filesWritten = 0;
 
@@ -74,6 +73,25 @@ export class ConvertVanillaToJsonDirectoryStructureExecutor {
         );
         filesWritten++;
       });
+
+    const outTextureDir = join(this.outDirPath, 'textures');
+    this.fs.makeDir(outTextureDir);
+
+    const xnbFilesInTexturesDir = await this.fs.lsDirRecursive(
+      this.srcFilepath,
+      (x) =>
+        x.parentPath.toLocaleLowerCase().endsWith('textures') &&
+        x.name.endsWith('.xnb')
+    );
+    const xnbFiles = xnbFilesInTexturesDir.filter((x) => x.isFile());
+    await Promise.all(
+      xnbFiles.map((f) =>
+        this.fs.copyFile(
+          join(f.parentPath, f.name),
+          join(outTextureDir, f.name)
+        )
+      )
+    );
 
     Logger.log(
       `Written ${filesWritten} files to ${this.outDirPath} and sub-directories.`

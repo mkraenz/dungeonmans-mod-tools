@@ -38,7 +38,7 @@ export class FileSystem {
   }
 
   async copyFile(srcPath: string, destPath: string) {
-    if (this.verbose) Logger.log('WRITE FILE:', destPath);
+    if (this.verbose) Logger.log('WRITE FILE (COPY):', destPath);
     if (!this.dryRun) await fsp.copyFile(srcPath, destPath);
   }
 
