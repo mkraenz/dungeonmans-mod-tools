@@ -55,3 +55,7 @@ test/
 .nx/migrate-runs
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
+
+*.log
+allentities.json
+dmans-converted/
