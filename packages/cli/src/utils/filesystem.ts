@@ -33,6 +33,10 @@ export class FileSystem {
     if (!this.dryRun) await fsp.mkdir(dir, { recursive: true });
   }
 
+  async makeDirMany(dirs: string[]) {
+    return Promise.all(dirs.map((dir) => this.makeDir(dir)));
+  }
+
   async copyFile(srcPath: string, destPath: string) {
     if (this.verbose) Logger.log('WRITE FILE:', destPath);
     if (!this.dryRun) await fsp.copyFile(srcPath, destPath);
@@ -79,6 +83,8 @@ export class FileSystem {
   }
 
   exists = fs.existsSync;
+  dirname = path.dirname;
+  basename = path.basename;
 }
 
 export const isFile = (dirent: fs.Dirent, extname: string) =>

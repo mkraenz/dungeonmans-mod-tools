@@ -55,3 +55,6 @@ test/
 .nx/migrate-runs
 
 allentities.json
+
+dmans-converted/
+*.log
