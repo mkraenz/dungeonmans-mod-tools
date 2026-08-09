@@ -26,8 +26,9 @@ const dereference = (raw: string) => {
 const Portrait: FC<PortraitProps> = ({ actor, sprite, textures }) => {
   const dataUrl = textures[sprite.texturename]?.dataUrl;
   return (
-    <>
+    <article>
       <p>{actor.name}</p>
+      <p>{sprite.texturename}</p>
       <div
         className={styles.actorPortrait}
         style={{
@@ -40,7 +41,7 @@ const Portrait: FC<PortraitProps> = ({ actor, sprite, textures }) => {
           height: `${sprite.height}px`,
         }}
       />
-    </>
+    </article>
   );
 };
 
@@ -84,7 +85,8 @@ const Actors: FC<Props> = () => {
     const files: Record<DirName, File[]> = {};
     const dirHandle = await window.showDirectoryPicker();
     for await (const entry of dirHandle.values()) {
-      console.log(entry.kind, entry.name);
+      const dirName = entry.name.toLowerCase();
+      console.log(entry.kind, dirName);
       if (entry.kind === 'directory') {
         for await (const subDirEntry of entry.values()) {
           console.log('Sub-entry:', subDirEntry.kind, subDirEntry.name);
@@ -106,8 +108,8 @@ const Actors: FC<Props> = () => {
                   continue;
                 }
                 console.log('File contents:', contents);
-                files[entry.name] ??= [];
-                files[entry.name].push({
+                files[dirName] ??= [];
+                files[dirName].push({
                   name: subDirEntry.name,
                   contents: parsed,
                 });
@@ -118,7 +120,7 @@ const Actors: FC<Props> = () => {
               }
               case 'image/png': {
                 // not great in terms of memory but i don't know how to grab the absolute URL on the file system...
-                if (entry.name !== DMANS_TEXTURE_DIR) {
+                if (dirName !== DMANS_TEXTURE_DIR) {
                   console.log(
                     'Textures outside the textures/ directory will be ignored by Dungeonmans.'
                   );
