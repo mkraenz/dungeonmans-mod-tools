@@ -1,7 +1,9 @@
 import { Command } from '@commander-js/extra-typings';
 import { createExtractCommand } from '../extract/extract.command.js';
+import { createParseAllCommand } from '../parse/parse-all.command.js';
 import { createParseCommand } from '../parse/parse.command.js';
 import { createExplorerCommand } from './explorer.command.js';
+import { convertVanillaToJsonDirectoryStructureCommand } from '../parse/convert-vanilla-to-json-directory-structure.command.js';
 
 export const createExperimentalParentCommand = () => {
   return new Command()
@@ -11,5 +13,7 @@ export const createExperimentalParentCommand = () => {
     )
     .addCommand(createExplorerCommand())
     .addCommand(createExtractCommand())
-    .addCommand(createParseCommand());
+    .addCommand(createParseCommand())
+    .addCommand(createParseAllCommand())
+    .addCommand(convertVanillaToJsonDirectoryStructureCommand());
 };

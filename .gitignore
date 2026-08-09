@@ -53,3 +53,8 @@ test/
 .nx/polygraph
 .nx/self-healing
 .nx/migrate-runs
+
+allentities.json
+
+dmans-converted/
+*.log
