@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  cacheDir: '../../node_modules/.vite/apps/web',
+  cacheDir: '../../node_modules/.vite/packages/viewer',
   server: {
     port: 4200,
     host: 'localhost',
@@ -27,7 +27,7 @@ export default defineConfig(() => ({
     },
   },
   test: {
-    name: '@dungeonmans-mod-tools/web',
+    name: '@dungeonmans-mod-tools/viewer',
     watch: false,
     globals: true,
     environment: 'jsdom',
