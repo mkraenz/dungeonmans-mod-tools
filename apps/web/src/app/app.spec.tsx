@@ -19,9 +19,6 @@ describe('App', () => {
         <App />
       </BrowserRouter>
     );
-    expect(
-      getAllByText(new RegExp('Welcome @dungeonmans-mod-tools/web', 'gi'))
-        .length > 0
-    ).toBeTruthy();
+    expect(getAllByText(new RegExp('actors', 'gi')).length > 0).toBeTruthy();
   });
 });

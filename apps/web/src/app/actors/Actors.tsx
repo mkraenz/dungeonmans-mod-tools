@@ -10,7 +10,6 @@ import { attempt, isError } from 'lodash-es';
 
 const DMANS_TEXTURE_DIR = 'textures';
 
-type Props = {};
 type PortraitProps = {
   actor: DmMonster;
   sprite: DmMonsterSprite;
@@ -57,7 +56,7 @@ const toDataUrl = (file: File) =>
     reader.onerror = reject;
   });
 
-const Actors: FC<Props> = () => {
+const Actors: FC = () => {
   const [data, setData] = useState<{
     actors: [string, DmMonster][];
     textures: TextureRegistry;
@@ -86,16 +85,13 @@ const Actors: FC<Props> = () => {
     const dirHandle = await window.showDirectoryPicker();
     for await (const entry of dirHandle.values()) {
       const dirName = entry.name.toLowerCase();
-      console.log(entry.kind, dirName);
+      // console.log(entry.kind, dirName);
       if (entry.kind === 'directory') {
         for await (const subDirEntry of entry.values()) {
           console.log('Sub-entry:', subDirEntry.kind, subDirEntry.name);
           if (subDirEntry.kind === 'file') {
             const file = await subDirEntry.getFile();
-            const isTextFile = file.type === 'text/plain';
-            const isJsonFile = file.type === 'application/json';
-            const isPngFile = file.type === 'image/png';
-            console.log(file.type);
+            // console.log(file.type);
             switch (file.type) {
               case 'application/json': {
                 const contents = await file.text();
@@ -107,7 +103,6 @@ const Actors: FC<Props> = () => {
                   );
                   continue;
                 }
-                console.log('File contents:', contents);
                 files[dirName] ??= [];
                 files[dirName].push({
                   name: subDirEntry.name,
@@ -144,15 +139,12 @@ const Actors: FC<Props> = () => {
       ([_, actor]) => actor.class === 'dmMonster'
     ) as [string, DmMonster][];
 
-    const spriteRegistry = (files['spritedata'] ?? []).reduce<DmSprites>(
-      (acc, file) => {
-        return {
-          ...acc,
-          ...(file.contents as any),
-        };
-      },
-      {}
-    );
+    const spriteRegistry = (files['spritedata'] ?? []).reduce((acc, file) => {
+      return {
+        ...acc,
+        ...(file.contents as DmSprites),
+      };
+    }, {} as DmSprites);
 
     setData({
       actors: monsterRegistry,
