@@ -1,6 +1,7 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styles from './portrait.module.css';
 import { DmMonster, DmMonsterSprite } from '@dungeonmans-mod-tools/schemas';
+import { useAppStore } from '../useAppStore.hook';
 
 type TextureRegistry = Record<string, { name: string; dataUrl: string }>;
 
@@ -13,11 +14,21 @@ type PortraitProps = {
 };
 
 const Portrait: FC<PortraitProps> = ({ actor, sprite, textures }) => {
+  const store = useAppStore();
   const dataUrl = textures[sprite.texturename]?.dataUrl;
+  const handleClick = () => {
+    store.setSelected({ actor, sprite });
+    store.toggleSidebar();
+  };
+  const selected = store.selected?.actor === actor;
   return (
-    <article className={styles.card}>
+    <article
+      className={styles.card}
+      onClick={handleClick}
+      data-selected={selected}
+    >
       <p>{actor.name}</p>
-      <p>{sprite.texturename}</p>
+      {/* <p>{sprite.texturename}</p> */}
       <div
         className={styles.actorPortrait}
         style={{

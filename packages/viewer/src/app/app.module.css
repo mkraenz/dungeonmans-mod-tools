@@ -1,1 +1,16 @@
-/* Your styles goes here. */
+.grid {
+  display: grid;
+  grid-template-areas: 'main sidebar';
+  grid-template-columns: 1fr 0fr;
+}
+.grid[data-sidebar-opened='true'] {
+  grid-template-columns: 50% 50%;
+}
+
+.main {
+  max-width: 45vw;
+}
+
+.sidebar {
+  max-width: 45vw;
+}

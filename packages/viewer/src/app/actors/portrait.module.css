@@ -3,5 +3,9 @@
 }
 
 .card:hover {
-  filter: brightness(1);
+  filter: brightness(2);
+}
+
+.card[data-selected='true'] {
+  filter: brightness(1.4);
 }
