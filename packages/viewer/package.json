@@ -1,10 +1,10 @@
 {
-  "name": "@dungeonmans-mod-tools/web",
+  "name": "@dungeonmans-mod-tools/viewer",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "tags": [
-      "scope:web",
+      "scope:viewer",
       "type:app",
       "platform:web"
     ]

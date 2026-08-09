@@ -64,8 +64,7 @@
     "webpack-cli": "7.2.1"
   },
   "workspaces": [
-    "packages/*",
-    "apps/*"
+    "packages/*"
   ],
   "dependencies": {
     "@commander-js/extra-typings": "^13.1.0",

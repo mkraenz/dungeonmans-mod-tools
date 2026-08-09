@@ -16,7 +16,7 @@
       "path": "./packages/entitydef-compiler"
     },
     {
-      "path": "./apps/web"
+      "path": "./packages/viewer"
     }
   ],
   "compilerOptions": {
